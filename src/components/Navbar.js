@@ -19,7 +19,7 @@ const Navbar = () => {
       <Disclosure as="nav">
         {({ open }) => (
           <>
-            <div className="max-w-7xl mx-auto lg:px-10 sm:px-6 px-4 py-4">
+            <div className="max-w-7xl mx-auto lg:px-8 sm:px-6 px-4 py-4">
               <div className="flex items-center justify-between">
                 {/* Langugage */}
                 <select className="md:block hidden">
