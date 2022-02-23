@@ -10,6 +10,7 @@ import { NavLink } from "react-router-dom";
 const navigation = [
   { name: "Register", path: "/register" },
   { name: "Sign-in", path: "/signin" },
+  { name: "Products", path: "/products" },
 ];
 
 const Navbar = () => {

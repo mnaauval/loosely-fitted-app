@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { FavoriteBorderOutlined, ShoppingCartOutlined, Visibility } from "@mui/icons-material";
 import { popularProducts } from "../data";
 
 const Icon = styled.div`
@@ -30,13 +28,13 @@ const ProductsPopular = () => {
           <img src={product.img} alt={product.id} className="h-3/4 z-[2]" />
           <div className="w-full h-full absolute top-0 left-0 bg-black/20 z-[3] flex items-center justify-center transition duration-500 ease cursor-pointer opacity-0 hover:opacity-100">
             <Icon>
-              <ShoppingCartOutlinedIcon />
+              <ShoppingCartOutlined />
             </Icon>
             <Icon>
-              <SearchOutlinedIcon />
+              <Visibility />
             </Icon>
             <Icon>
-              <FavoriteBorderOutlinedIcon />
+              <FavoriteBorderOutlined />
             </Icon>
           </div>
         </div>
