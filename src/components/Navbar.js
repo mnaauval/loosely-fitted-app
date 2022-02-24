@@ -30,7 +30,7 @@ const Navbar = () => {
                 {/* Search */}
                 <div className="flex flex-1 ">
                   <div className="flex items-center ml-5 px-2 py-1 border-2 border-gray-300">
-                    <input type="search" className="border-none md:max-w-full max-w-[100px]" placeholder="Search" />
+                    <input type="search" className="border-none md:max-w-full max-w-[100px] focus:outline-none" placeholder="Search" />
                     <SearchIcon className="w-5 h-5 ml-1 text-gray-500" />
                   </div>
                 </div>
