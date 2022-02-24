@@ -39,7 +39,7 @@ const Navbar = () => {
                   </div>
 
                   {/* Brand */}
-                  <div className="md:flex hidden flex-1 mx-5">
+                  <div className="sm:flex hidden flex-1 mx-5">
                     <NavLink to="/">
                       <h1 className="text-4xl underline">LooFi</h1>
                     </NavLink>

@@ -23,7 +23,7 @@ const Register = () => {
         <div className="w-auto p-5 bg-white">
           <form className="flex items-center justify-center flex-col">
             <h1 className="text-2xl">CREATE AN ACCOUNT</h1>
-            <div class="sm:flex hidden ">
+            <div className="sm:flex hidden ">
               <Input type="text" placeholder="First Name" />
               <Input type="text" placeholder="Last Name" />
             </div>
