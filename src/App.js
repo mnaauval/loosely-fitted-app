@@ -5,8 +5,10 @@ import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import ProductDetail from "./pages/ProductDetail";
 import ProductsList from "./pages/ProductsList";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/productlist" element={<ProductsList />} />
         <Route path="/product" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Newsletter />
       <Footer />

@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 const navigation = [
   { name: "Register", path: "/register" },
-  { name: "Sign-in", path: "/signin" },
+  { name: "Sign-in", path: "/login" },
   { name: "Products", path: "/productlist" },
 ];
 

@@ -25,7 +25,7 @@ const Cart = () => {
     <div className="sm:p-5 p-2.5">
       <h1 className="text-4xl font-light text-center">YOUR BAG</h1>
       {/* Top */}
-      <div className="flex items-center justify-between p-5">
+      <div className="flex items-center sm:justify-between justify-center p-5">
         <Button className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">CONTINUE SHOPPING</Button>
         <div className="sm:flex flex-col items-center hidden">
           <span className="underline cursor-pointer my-0 mx-2.5">Shopping Bag {2}</span>
