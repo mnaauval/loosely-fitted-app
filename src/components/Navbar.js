@@ -54,11 +54,11 @@ const Navbar = () => {
                     </div>
                   </div>
 
-                  <NavLink to="/cart" className="flex items-center pl-10 pr-5">
+                  <Disclosure.Button as={NavLink} to="/cart" className="flex items-center pl-10 pr-5">
                     <Badge badgeContent={4} color="primary">
                       <ShoppingCartIcon className="text-gray-500" />
                     </Badge>
-                  </NavLink>
+                  </Disclosure.Button>
 
                   {/* Mobile Navigation */}
                   <div className="sm:hidden block ">

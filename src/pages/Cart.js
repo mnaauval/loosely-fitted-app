@@ -23,10 +23,9 @@ const SummaryItem = styled.div`
 const Cart = () => {
   return (
     <div className="sm:p-5 p-2.5">
-      <h1 className="text-4xl font-light text-center">YOUR BAG</h1>
+      <h1 className="text-4xl font-light text-center">YOUR CART</h1>
       {/* Top */}
       <div className="flex items-center sm:justify-between justify-center p-5">
-        <Button className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">CONTINUE SHOPPING</Button>
         <div className="sm:flex flex-col items-center hidden">
           <span className="underline cursor-pointer my-0 mx-2.5">Shopping Bag {2}</span>
           <span className="underline cursor-pointer my-0 mx-2.5">Your Wishlist {2}</span>
@@ -55,20 +54,20 @@ const Cart = () => {
               </div>
             </div>
             {/* Detail Price */}
-            <div className="flex-1 flex flex-col items-center justify-center">
-              <div className="flex items-center font-bold mb-5">
+            <div className="flex-1 flex items-center justify-center py-2">
+              <div className="flex items-center font-bold mx-2">
                 <Remove className="cursor-pointer" />
                 <span className="w-[30px] h-[30px] rounded-md border-2 flex items-center justify-center my-0 mx-1">{1}</span>
                 <Add className="cursor-pointer" />
               </div>
-              <span className="text-3xl font-thin pb-5">{`$30`}</span>
+              <span className="text-3xl font-thin mx-2">{`$30`}</span>
             </div>
           </div>
-          <hr className="bg-[#eee] border-none h-1" />
+          <hr className="bg-[#eee] border-none h-1 my-2" />
         </div>
 
         {/* Summary */}
-        <div className="flex-1 border border-gray-400 rounded-md p-5 h-[70vh]">
+        <div className=" border-4 border-gray-400 rounded-md p-5 ">
           <h1 className="text-4xl font-light text-center">ORDER SUMMARY</h1>
           <SummaryItem className="my-8 mx-0 flex justify-between">
             <span>Sutotal</span>
@@ -80,7 +79,7 @@ const Cart = () => {
           </SummaryItem>
           <SummaryItem className="my-8 mx-0 flex justify-between">
             <span>Discount</span>
-            <span>{`$-30`}</span>
+            <span>{`-$30`}</span>
           </SummaryItem>
           <SummaryItem className="my-8 mx-0 flex justify-between">
             <span>Tax</span>
@@ -90,10 +89,14 @@ const Cart = () => {
             <span>Total</span>
             <span>{`$60`}</span>
           </SummaryItem>
-          <Button type="filled" className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
+          <Button type="filled" className="p-2.5 font-bold cursor-pointer border-2 border-gray-500 w-full">
             CHECKOUT NOW
           </Button>
         </div>
+      </div>
+
+      <div className="sm:block flex items-center justify-center sm:mt-0 mt-10 mb-5">
+        <Button className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">CONTINUE SHOPPING</Button>
       </div>
     </div>
   );
