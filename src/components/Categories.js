@@ -3,7 +3,7 @@ import { categories } from "../data";
 
 const Categories = () => {
   return (
-    <div className="flex sm:flex-row flex-col sm:p-5 p-0 justify-between">
+    <div className="xs:flex hidden sm:flex-row flex-col sm:p-5 p-0 justify-between">
       {categories.map((category) => (
         <div key={category.id} className="flex-1 m-[3px] h-[70vh] relative">
           <img src={category.img} alt={category.title} className="w-full sm:h-full h-[20vh] object-cover" />

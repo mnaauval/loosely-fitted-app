@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Announcement from "./components/Announcement";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
@@ -13,7 +12,6 @@ import Register from "./pages/Register";
 function App() {
   return (
     <Router>
-      <Announcement />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

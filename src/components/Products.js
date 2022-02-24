@@ -21,7 +21,7 @@ const Icon = styled.div`
 
 const Products = () => {
   return (
-    <div className="p-5 flex flex-wrap justify-between">
+    <div className="p-5 xs:flex hidden flex-wrap justify-between">
       {popularProducts.map((product) => (
         <div key={product.id} className="flex-1 m-1.5 min-w-[280px] h-[22rem] flex items-center justify-center bg-[#f5fbfd] relative">
           <div className="w-52 h-52 rounded-full bg-white absolute"></div>

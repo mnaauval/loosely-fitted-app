@@ -3,7 +3,7 @@ import SendIcon from "@mui/icons-material/Send";
 
 const Newsletter = () => {
   return (
-    <div className="h-[60vh] bg-[#fcf5f5] flex items-center justify-center flex-col">
+    <div className="h-[60vh] bg-[#fcf5f5] xs:flex hidden items-center justify-center flex-col">
       <h1 className="md:text-[70px] text-4xl mb-[20px] font-bold">Newsletter</h1>
       <div className="sm:text-2xl text-lg font-light mb-2 5 text-center">Get updates from your favourites products</div>
       <div className="sm:w-1/2 w-4/5 h-[40px] bg-white flex justify-between border border-gray-300">

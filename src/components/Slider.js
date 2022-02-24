@@ -25,7 +25,7 @@ const Slider = () => {
   };
 
   return (
-    <div className="w-full h-screen flex relative overflow-hidden">
+    <div className="w-full h-screen xs:flex hidden relative overflow-hidden">
       {slideIndex === 0 ? (
         <Arrow direction="left" onClick={() => handleClick("left")} className="hidden">
           <ArrowLeftIcon />

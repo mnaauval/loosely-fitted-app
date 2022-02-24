@@ -23,7 +23,7 @@ const ContactItem = styled.div`
 
 const Footer = () => {
   return (
-    <div className="flex lg:flex-row flex-col">
+    <div className="xs:flex hidden lg:flex-row flex-col">
       <div className="flex flex-1 flex-col p-5">
         <h1 className="text-4xl underline sm:text-left text-center">LooFi</h1>
         <p className="m-5 ml-0 sm:text-justify text-center"> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.</p>
