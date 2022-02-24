@@ -30,9 +30,9 @@ const Register = () => {
             <Input className="sm:hidden" type="text" placeholder="First Name" />
             <Input className="sm:hidden" type="text" placeholder="Last Name" />
             <Input type="text" placeholder="Username" />
-            <Input type="text" placeholder="Email" />
-            <Input type="text" placeholder="Password" />
-            <Input type="text" placeholder="Confirm Password" />
+            <Input type="email" placeholder="Email" />
+            <Input type="password" placeholder="Password" />
+            <Input type="password" placeholder="Confirm Password" />
             <div className="flex items-start my-5">
               <div className="flex items-center h-5">
                 <input id="terms" type="checkbox" className="w-4 h-4 bg-gray-50 rounded border border-gray-300" required />

@@ -23,8 +23,8 @@ const Login = () => {
         <div className="sm:w-2/5 w-auto p-5 bg-white">
           <form className="flex items-center justify-center flex-col">
             <h1 className="text-2xl">LOGIN</h1>
-            <Input type="text" placeholder="Username" />
-            <Input type="text" placeholder="Password" />
+            <Input type="email" placeholder="Email" />
+            <Input type="password" placeholder="Password" />
             <button type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer">
               LOGIN
             </button>
