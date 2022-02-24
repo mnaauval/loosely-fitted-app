@@ -19,7 +19,7 @@ const Icon = styled.div`
   }
 `;
 
-const ProductsPopular = () => {
+const Products = () => {
   return (
     <div className="p-5 flex flex-wrap justify-between">
       {popularProducts.map((product) => (
@@ -43,4 +43,4 @@ const ProductsPopular = () => {
   );
 };
 
-export default ProductsPopular;
+export default Products;

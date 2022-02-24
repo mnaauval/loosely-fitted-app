@@ -1,6 +1,6 @@
 import React from "react";
 import Categories from "../components/Categories";
-import ProductsPopular from "../components/ProductsPopular";
+import Products from "../components/Products";
 import Slider from "../components/Slider";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
     <>
       <Slider />
       <Categories />
-      <ProductsPopular />
+      <Products />
     </>
   );
 };

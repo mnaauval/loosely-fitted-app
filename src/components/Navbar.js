@@ -10,7 +10,7 @@ import { NavLink } from "react-router-dom";
 const navigation = [
   { name: "Register", path: "/register" },
   { name: "Sign-in", path: "/signin" },
-  { name: "Products", path: "/products" },
+  { name: "Products", path: "/productlist" },
 ];
 
 const Navbar = () => {
@@ -54,11 +54,11 @@ const Navbar = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center pl-10 pr-5">
+                  <NavLink to="/cart" className="flex items-center pl-10 pr-5">
                     <Badge badgeContent={4} color="primary">
                       <ShoppingCartIcon className="text-gray-500" />
                     </Badge>
-                  </div>
+                  </NavLink>
 
                   {/* Mobile Navigation */}
                   <div className="sm:hidden block ">
@@ -71,9 +71,9 @@ const Navbar = () => {
             {/* Mobile Navigation */}
             <Disclosure.Panel className="sm:hidden block bg-white">
               <div className="pb-5 mt-2 px-2 shadow-md">
-                <NavLink to="/">
+                <Disclosure.Button as={NavLink} to="/">
                   <h1 className="text-3xl text-center py-2 underline">LooFi</h1>
-                </NavLink>
+                </Disclosure.Button>
                 {navigation.map((nav) => (
                   <Disclosure.Button key={nav.name} as={NavLink} to={nav.path} className="block px-3 py-2 font-medium text-center">
                     {nav.name}

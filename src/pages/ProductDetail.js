@@ -6,15 +6,15 @@ const FilterColor = styled.div`
   background-color: ${(props) => props.color};
 `;
 
-const Product = () => {
+const ProductDetail = () => {
   return (
     <div className="sm:p-12 p-2.5 flex md:flex-row flex-col ">
       <div className="flex-1">
-        <img src="" alt="" className="w-full sm:h-[90vh] h-[40vh] object-cover" />
+        <img src="https://i.ytimg.com/vi/pjmELN92fUM/maxresdefault.jpg" alt="Denim Jumpshoot" className="w-full sm:h-[90vh] h-[40vh] object-cover" />
       </div>
 
       <div className="flex-1 md:px-12 md:py-0 p-2.5">
-        <h1 className="font-light text-4xl">Denim Jumpsuit</h1>
+        <h1 className="font-light text-4xl">Alok Jumpshoot</h1>
         <p className="my-5 mx-0 text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec venenatis, dolor in finibus malesuada, lectus ipsum porta nunc, at iaculis arcu nisi sed mauris. Nulla fermentum vestibulum ex, eget tristique tortor pretium ut. Curabitur elit justo, consequat id condimentum ac, volutpat ornare.</p>
         <span className="font-extralight text-[40px]">{`$ 20`}</span>
         <div className="sm:w-1/2 w-full my-8 mx-0 flex justify-between sm:flex-row flex-col">
@@ -26,8 +26,8 @@ const Product = () => {
           </div>
           <div className="flex items-center sm:mx-10 mx-0 sm:my-0 my-5">
             <span className="md:text-xl text-md font-semibold sm:mr-5 mr-0">Size: </span>
-            <select className="sm:p-2.5 px-2.5 py-1 sm:mr-5 mr-0 ml-2.5">
-              <option defaultValue="Color" disabled>
+            <select className="sm:p-2.5 px-2.5 py-1 sm:mr-5 mr-0 ml-2.5 border-2 border-gray-400 rounded-md">
+              <option defaultValue="XS" disabled>
                 Size
               </option>
               <option value="">XS</option>
@@ -38,9 +38,9 @@ const Product = () => {
             </select>
           </div>
           <div className="flex items-center font-bold">
-            <Remove />
-            <span className="w-[30px] h-[30px] rounded-md border-2 border-teal-700 flex items-center justify-center my-0 mx-1">{1}</span>
-            <Add />
+            <Remove className="cursor-pointer" />
+            <span className="w-[30px] h-[30px] rounded-md border-2 flex items-center justify-center my-0 mx-1">{1}</span>
+            <Add className="cursor-pointer" />
           </div>
         </div>
         <div className="flex items-center justify-center">
@@ -51,4 +51,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductDetail;
