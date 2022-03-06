@@ -1,6 +1,6 @@
 import React from "react";
 import Categories from "../components/Categories";
-import Products from "../components/Products";
+import NewestProducts from "../components/NewestProducts";
 import RequiredScreen from "../components/RequiredScreen";
 import Slider from "../components/Slider";
 
@@ -10,7 +10,7 @@ const Home = () => {
       <RequiredScreen />
       <Slider />
       <Categories />
-      <Products />
+      <NewestProducts />
     </>
   );
 };

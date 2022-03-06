@@ -20,7 +20,7 @@ const Icon = styled.div`
   }
 `;
 
-const Products = ({ filter, sort }) => {
+const ProductsWithCategory = ({ cat, filter, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const productsSum = filteredProducts.length;
@@ -28,14 +28,14 @@ const Products = ({ filter, sort }) => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await publicRequest.get(`products`);
+        const res = await publicRequest.get(`/products?category=${cat}`);
         setProducts(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getProducts();
-  }, []);
+  }, [cat]);
 
   useEffect(() => {
     // prettier-ignore
@@ -44,7 +44,7 @@ const Products = ({ filter, sort }) => {
         Object.entries(filter).every(([key, value]) => item[key].includes(value))
       )
     );
-  }, [products, filter]);
+  }, [products, cat, filter]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -59,7 +59,7 @@ const Products = ({ filter, sort }) => {
   return (
     <div>
       <p className="text-right text-gray-60 px-8">Showing {productsSum} products</p>
-      <h1 className="text-center text-4xl">{`All Category`.toUpperCase()}.</h1>
+      <h1 className="text-center text-4xl">{cat?.toUpperCase()}</h1>
       <div className="p-5 xs:flex hidden flex-wrap justify-between">
         {filteredProducts.map((product) => (
           <div key={product.id} className="flex-1 m-1.5 min-w-[280px] h-[22rem] flex items-center justify-center bg-[#f5fbfd] relative">
@@ -85,4 +85,4 @@ const Products = ({ filter, sort }) => {
   );
 };
 
-export default Products;
+export default ProductsWithCategory;

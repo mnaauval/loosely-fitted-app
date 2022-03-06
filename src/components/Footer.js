@@ -26,7 +26,7 @@ const Footer = () => {
     <div className="xs:flex hidden lg:flex-row flex-col">
       <div className="flex flex-1 flex-col p-5">
         <h1 className="text-4xl underline sm:text-left text-center">LooFi</h1>
-        <p className="m-5 ml-0 sm:text-justify text-center"> There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly believable.</p>
+        <p className="m-5 ml-0 sm:text-justify text-center"> Made with &#10084;&#65039; by Nauval Eka</p>
         <div className="flex sm:justify-start justify-center">
           <SocialIcon color="3B5999">
             <Facebook />
@@ -37,9 +37,9 @@ const Footer = () => {
           <SocialIcon color="55ACEE">
             <Twitter />
           </SocialIcon>
-          <SocialIcon color="E60023">
+          {/* <SocialIcon color="E60023">
             <Pinterest />
-          </SocialIcon>
+          </SocialIcon> */}
         </div>
       </div>
       <div className="md:flex  flex-1 flex-col hidden p-5">

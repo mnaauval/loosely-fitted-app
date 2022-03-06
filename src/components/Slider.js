@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import styled from "styled-components";
-import { sliderItems } from "../data";
+import { sliderItems } from "../utilities/data";
 
 const Arrow = styled.div`
   left: ${(props) => props.direction === "left" && "10px"};
