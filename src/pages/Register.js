@@ -1,14 +1,15 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import RequiredScreen from "../components/RequiredScreen";
+import { publicRequest } from "../utilities/requestMethods";
 
 const Container = styled.div`
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
 `;
 
 const Input = styled.input`
-  min-width: 40%;
+  min-width: 50%;
   margin: 10px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -16,6 +17,23 @@ const Input = styled.input`
 `;
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const newRegister = async () => {
+    try {
+      const res = await publicRequest.post("auth/register", { username, email, password });
+      console.log(res);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const handleClick = (e) => {
+    newRegister();
+  };
+
   return (
     <>
       <RequiredScreen />
@@ -23,16 +41,16 @@ const Register = () => {
         <div className="w-auto p-5 bg-white">
           <form className="flex items-center justify-center flex-col">
             <h1 className="text-2xl">CREATE AN ACCOUNT</h1>
-            <div className="sm:flex hidden ">
+            {/* <div className="sm:flex hidden ">
               <Input type="text" placeholder="First Name" />
               <Input type="text" placeholder="Last Name" />
-            </div>
-            <Input className="sm:hidden" type="text" placeholder="First Name" />
-            <Input className="sm:hidden" type="text" placeholder="Last Name" />
-            <Input type="text" placeholder="Username" />
-            <Input type="email" placeholder="Email" />
-            <Input type="password" placeholder="Password" />
-            <Input type="password" placeholder="Confirm Password" />
+            </div> */}
+            {/* <Input className="sm:hidden" type="text" placeholder="First Name" />
+            <Input className="sm:hidden" type="text" placeholder="Last Name" /> */}
+            <Input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
+            <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+            <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+            {/* <Input type="password" placeholder="Confirm Password" /> */}
             <div className="flex items-start my-5">
               <div className="flex items-center h-5">
                 <input id="terms" type="checkbox" className="w-4 h-4 bg-gray-50 rounded border border-gray-300" required />
@@ -46,7 +64,7 @@ const Register = () => {
                 </label>
               </div>
             </div>
-            <button type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer">
+            <button onClick={handleClick} type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer">
               CREATE
             </button>
           </form>
