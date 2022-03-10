@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import RequiredScreen from "../components/RequiredScreen";
 import { publicRequest } from "../utilities/requestMethods";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Container = styled.div`
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
@@ -17,20 +19,26 @@ const Input = styled.input`
 `;
 
 const Register = () => {
+  toast.configure();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const newRegister = async () => {
     try {
       const res = await publicRequest.post("auth/register", { username, email, password });
       console.log(res);
+      window.location.reload();
+      toast("Register Success", { type: "success" });
     } catch (error) {
-      alert(error);
+      // alert(error);
+      toast(`Register Failed: ${error}`, { type: "error" });
     }
   };
 
   const handleClick = (e) => {
+    e.preventDefault();
     newRegister();
   };
 
