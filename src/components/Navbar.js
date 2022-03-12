@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Announcement from "./Announcement";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/features/userSlice";
+import { clearCart } from "../redux/features/cartSlice";
 
 const navigation = [
   { name: "Register", path: "/register" },
@@ -18,7 +19,7 @@ const navigation = [
 const navigation2 = [{ name: "Products", path: "/products" }];
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cart.quantity);
+  const { totalQuantity } = useSelector((state) => state.cart);
   const { isLoggedOut } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Navbar = () => {
   const logoutHandler = (e) => {
     e.preventDefault();
     dispatch(logout());
+    dispatch(clearCart);
     navigate("/");
   };
   return (
@@ -85,7 +87,7 @@ const Navbar = () => {
                           </div>
                         </div>
                         <NavLink to="/cart" className="flex items-center pl-10 pr-5">
-                          <Badge badgeContent={quantity} color="primary">
+                          <Badge badgeContent={totalQuantity} color="primary">
                             <ShoppingCartIcon className="text-gray-500" />
                           </Badge>
                         </NavLink>

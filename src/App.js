@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
 import ScrollToTop from "./components/ScrollToTop";
+import SizeModal from "./components/SizeModal";
 import SuccessPayment from "./components/SuccessPayment";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
         <Route path="/success" element={<SuccessPayment />} />
+        <Route path="/modal" element={<SizeModal />} />
       </Routes>
       <Newsletter />
       <Footer />

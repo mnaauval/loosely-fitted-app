@@ -23,13 +23,14 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const newRegister = async () => {
     try {
-      const res = await publicRequest.post("auth/register", { username, email, password });
+      const res = await publicRequest.post("auth/register", { username, email, password, confirmPassword });
       console.log(res);
-      window.location.reload();
+      navigate("/login");
       toast("Register Success", { type: "success" });
     } catch (error) {
       // alert(error);
@@ -37,7 +38,7 @@ const Register = () => {
     }
   };
 
-  const handleClick = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     newRegister();
   };
@@ -47,7 +48,7 @@ const Register = () => {
       <RequiredScreen />
       <Container className="w-screen h-screen bg-cover xs:flex hidden items-center justify-center overflow-hidden">
         <div className="w-auto p-5 bg-white">
-          <form className="flex items-center justify-center flex-col">
+          <form onSubmit={handleSubmit} className="flex items-center justify-center flex-col">
             <h1 className="text-2xl">CREATE AN ACCOUNT</h1>
             {/* <div className="sm:flex hidden ">
               <Input type="text" placeholder="First Name" />
@@ -58,7 +59,7 @@ const Register = () => {
             <Input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
             <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            {/* <Input type="password" placeholder="Confirm Password" /> */}
+            <Input type="password" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
             <div className="flex items-start my-5">
               <div className="flex items-center h-5">
                 <input id="terms" type="checkbox" className="w-4 h-4 bg-gray-50 rounded border border-gray-300" required />
@@ -72,7 +73,7 @@ const Register = () => {
                 </label>
               </div>
             </div>
-            <button onClick={handleClick} type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer">
+            <button type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer">
               CREATE
             </button>
           </form>

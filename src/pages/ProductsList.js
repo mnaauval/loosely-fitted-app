@@ -48,7 +48,7 @@ const ProductsList = () => {
           </div>
           <div className="m-5 flex sm:flex-row flex-col sm:items-center">
             <span className="md:text-xl text-md font-semibold sm:mr-5 mr-0">Sort Products:</span>
-            <select onChange={handleSort} className="p-2.5 sm:mr-5 mr-0 sm:ml-2.5 ml-0 border-2 border-gray-400 rounded-md">
+            <select defaultValue="newest" onChange={handleSort} className="p-2.5 sm:mr-5 mr-0 sm:ml-2.5 ml-0 border-2 border-gray-400 rounded-md">
               <option value="newest">Newest</option>
               <option value="asc">Price (asc)</option>
               <option value="desc">Price (desc)</option>

@@ -3,15 +3,19 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userRequest } from "../utilities/requestMethods";
 import { clearCart } from "../redux/features/cartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SuccessPayment = () => {
-  const { products } = useSelector((state) => state.cart);
   const location = useLocation();
-  const { stripeData, cart } = location.state;
-  const { currentUser } = useSelector((state) => state.user);
-  const [orderId, setOrderId] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  toast.configure();
+
+  const { stripeData, cart } = location.state;
+  const { currentUser } = useSelector((state) => state.user);
+
+  const [orderId, setOrderId] = useState("");
 
   useEffect(() => {
     const createOrder = async () => {
@@ -27,15 +31,17 @@ const SuccessPayment = () => {
         });
         setOrderId(res.data._id);
         dispatch(clearCart());
+        toast("Order success", { type: "success" });
       } catch (error) {
         console.log(error);
+        toast("Order failed", { type: "error" });
       }
     };
-    createOrder();
+    stripeData && createOrder();
   }, [cart, stripeData, currentUser]);
 
   const clickHandler = () => {
-    navigate("/");
+    window.location.href = "/";
   };
 
   return (

@@ -38,7 +38,7 @@ const Slider = () => {
       <Wrapper slideIndex={slideIndex} className="h-full flex transition duration-[1500ms] ease">
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id} className="w-screen h-screen flex items-center">
-            <div className="h-full flex-1 lg:block hidden">
+            <div className="h-auto flex-1 lg:block hidden rounded-full bg-white ml-5">
               <img src={item.img} alt={item.name} className="h-4/5" />
             </div>
             <div className="flex-1 p-12">
