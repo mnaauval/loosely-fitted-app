@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import { publicRequest } from "../utilities/requestMethods";
 import { decreaseCart, getTotal, increaseCart } from "../redux/features/cartSlice";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import SizeModal from "../components/SizeModal";
 
 const KEY = "pk_test_51KXNo4BnzSnZyZ7MtFcoNl1vypU22HmTC7WX76PKoDv1dpgy7hTMGToL3xA9F1nQyRirNVq04onkz5Ah4rK2pUEc002vRANYoZ";
 
@@ -132,7 +131,6 @@ const Cart = () => {
                         <button onClick={openModal} className="rounded-full ml-10">
                           <EditOutlinedIcon />
                         </button>
-                        {/* <SizeModal showModal={showModal} setShowModal={setShowModal} currentId={product._id} /> */}
                       </span>
                       <span className="flex items-center">
                         <ProductColor color={product.color} className="w-[20px] h-[20px] rounded-full"></ProductColor>

@@ -12,7 +12,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginStart: (state, action) => {
+    loginStart: (state) => {
       state.isFetching = true;
       state.error = false;
     },
@@ -22,11 +22,11 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
       state.isLoggedOut = false;
     },
-    loginFailure: (state, action) => {
+    loginFailure: (state) => {
       state.isFetching = false;
       state.error = true;
     },
-    logout: (state, action) => {
+    logout: (state) => {
       state.currentUser = null;
       state.isLoggedIn = false;
       state.isLoggedOut = true;
