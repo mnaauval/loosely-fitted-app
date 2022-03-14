@@ -7,7 +7,18 @@ const FilterColor = styled.div`
 `;
 
 export default class QuickViewModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: "",
+      size: "",
+    };
+    this.modalRef = React.createRef();
+  }
+
   render() {
+    console.log(this.state.color, this.state.size);
+
     return (
       <div className="overflow-y-auto flex items-center justify-center fixed inset-0 z-50 bg-black/80">
         {/* Modal Wrapper */}
@@ -19,7 +30,7 @@ export default class QuickViewModal extends Component {
               <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
             </button>
             {/* Content Container */}
-            <div className="w-full grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8">
+            <div className="w-full grid grid-cols-1 gap-y-8 gap-x-6 items-start sm:grid-cols-12 lg:gap-x-8 bg-[#f5fbfd]">
               {/* Image */}
               {/* <div className="aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden sm:col-span-4 lg:col-span-5"> */}
               <div className="aspect-w-2 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden sm:col-span-4 lg:col-span-5">
@@ -34,20 +45,23 @@ export default class QuickViewModal extends Component {
                 <section className="mt-2">
                   <p className="text-gray-900 text-justify">{this.props.desc}</p>
                 </section>
-                <section aria-labelledby="options-heading" className="mt-10">
+                <section aria-labelledby="options-heading" className="mt-6">
                   <div>
                     <h3 className="text-md text-gray-900 font-medium">Color</h3>
                     <div className="flex items-center">
                       {this.props.color.map((c) => {
                         // return <FilterColor key={c} color={c} onClick={() => setColor(c)} className="w-[20px] h-[20px] rounded-full my-0 mx-1 cursor-pointer"></FilterColor>;
-                        return <FilterColor key={c} color={c} className="w-[20px] h-[20px] rounded-full my-0 mx-1 cursor-pointer"></FilterColor>;
+                        return <FilterColor key={c} color={c} onClick={() => this.setState({ color: c })} className="w-[20px] h-[20px] rounded-full my-0 mx-1 cursor-pointer"></FilterColor>;
                       })}
                     </div>
                   </div>
-                  <div className="mt-10">
+                  <div className="mt-5">
                     <h3 className="text-md text-gray-900 font-medium">Size</h3>
+                    {this.props.size.map((s) => {
+                      return <button className=" px-2.5 py-1 mr-5 border-2 border-gray-400 rounded-md w-16">{s}</button>;
+                    })}
                     {/* <select onChange={(e) => setSize(e.target.value)} className="sm:p-2.5 px-2.5 py-1 sm:mr-5 mr-0 ml-2.5 border-2 border-gray-400 rounded-md"> */}
-                    <select className="sm:p-2.5 px-2.5 py-1 sm:mr-5 border-2 border-gray-400 rounded-md">
+                    {/* <select onChange={(e) => this.setState({ size: e.target.value })} className="sm:p-2.5 px-2.5 py-1 sm:mr-5 border-2 border-gray-400 rounded-md">
                       {this.props.size.map((s) => {
                         return (
                           <option key={s} value={s}>
@@ -55,18 +69,18 @@ export default class QuickViewModal extends Component {
                           </option>
                         );
                       })}
-                    </select>
+                    </select> */}
                   </div>
                 </section>
               </div>
             </div>
           </div>
           {/* OK Wrapper */}
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          {/* <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button onClick={this.props.close} type="button" className="w-full inline-flex justify-center rounded-md border border-gray-700 shadow-sm px-4 py-2 bg-transparent text-base font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
               OK
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     );

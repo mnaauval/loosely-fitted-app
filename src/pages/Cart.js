@@ -111,32 +111,35 @@ const Cart = () => {
           </div>
 
           {/* Bottom */}
-          <div className="flex justify-between sm:flex-row flex-col">
+          <div className="flex justify-between md:flex-row flex-col">
             {/* Cart List */}
             <div className="grow-[3]">
               {cart.products?.map((product) => (
-                <div key={product._id} className="flex justify-between sm:flex-row flex-col">
+                <div key={product._id} className="flex justify-between md:flex-row flex-col">
                   {/* Detail Product */}
                   <div className="grow-[2] flex">
-                    <img src={product.imageUrl} alt="shoes" className="w-[200px]" />
+                    <img src={product.imageUrl} alt="shoes" className="sm:w-[200px] w-28" />
                     <div className="p-5 flex flex-col justify-around">
-                      <span>
-                        <b>Product: </b> {product.title}
-                      </span>
-                      <span>
-                        <b>ID: </b> {product._id}
-                      </span>
+                      <h3 className="text-2xl">
+                        {/* <b>Product: </b>  */}
+                        {product.title}
+                      </h3>
+                      {/* <span>
+                        <b>ID: </b> 
+                        {product._id}
+                      </span> */}
                       <span className="flex items-center">
-                        <b>Size: </b> {product.size}
-                        <button onClick={openModal} className="rounded-full ml-10">
+                        {/* <b>Size: </b>  */}
+                        {product.size}
+                        {/* <button className="rounded-full ml-10">
                           <EditOutlinedIcon />
-                        </button>
+                        </button> */}
                       </span>
                       <span className="flex items-center">
                         <ProductColor color={product.color} className="w-[20px] h-[20px] rounded-full"></ProductColor>
-                        <button className="rounded-full ml-16 ">
+                        {/* <button className="rounded-full ml-16 ">
                           <EditOutlinedIcon />
-                        </button>
+                        </button> */}
                       </span>
                     </div>
                   </div>
@@ -194,7 +197,7 @@ const Cart = () => {
             </div>
           </div>
 
-          <div className="sm:block flex items-center justify-center sm:mt-0 mt-10 mb-5">
+          <div className="md:block flex items-center justify-center md:mt-0 mt-10 mb-5">
             <Button onClick={clickHandler} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
               CONTINUE SHOPPING
             </Button>

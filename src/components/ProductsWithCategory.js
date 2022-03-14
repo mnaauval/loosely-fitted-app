@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { FavoriteBorderOutlined, ShoppingCartOutlined, Visibility } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import { publicRequest } from "../utilities/requestMethods";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, getTotal } from "../redux/features/cartSlice";
+import QuickViewModal from "./QuickViewModal";
 
 const Icon = styled.div`
   width: 40px;
@@ -21,8 +24,14 @@ const Icon = styled.div`
 `;
 
 const ProductsWithCategory = ({ cat, filter, sort }) => {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [tempData, setTempData] = useState([]);
+
   const productsSum = filteredProducts.length;
 
   useEffect(() => {
@@ -56,6 +65,21 @@ const ProductsWithCategory = ({ cat, filter, sort }) => {
     }
   }, [sort]);
 
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart, dispatch]);
+
+  const getData = (id, imageUrl, title, desc, price, color, size) => {
+    let currentTempData = [id, imageUrl, title, desc, price, color, size];
+    setTempData((item) => [1, ...currentTempData]);
+    console.log(tempData);
+    return setShowModal(true);
+  };
+
+  const handleAddToCart = (product) => {
+    dispatch(addCart(product));
+  };
+
   return (
     <div>
       <p className="text-right text-gray-60 px-8">Showing {productsSum} products</p>
@@ -66,14 +90,14 @@ const ProductsWithCategory = ({ cat, filter, sort }) => {
             <div className="w-52 h-52 rounded-full bg-white absolute"></div>
             <img src={product.imageUrl} alt={product.title} className="h-3/4 z-[2]" />
             <div className="w-full h-full absolute top-0 left-0 bg-black/20 z-[3] flex items-center justify-center transition duration-500 ease cursor-pointer opacity-0 hover:opacity-100">
-              <Icon>
+              <Icon onClick={() => handleAddToCart(product)}>
                 <ShoppingCartOutlined />
               </Icon>
-              <NavLink to={`/product/${product._id}`}>
-                <Icon>
-                  <Visibility />
-                </Icon>
-              </NavLink>
+              {/* <NavLink to={`/product/${product._id}`}> */}
+              <Icon onClick={() => getData(product._id, product.imageUrl, product.title, product.desc, product.price, product.color, product.size)}>
+                <Visibility />
+              </Icon>
+              {/* </NavLink> */}
               <Icon>
                 <FavoriteBorderOutlined />
               </Icon>
@@ -81,6 +105,8 @@ const ProductsWithCategory = ({ cat, filter, sort }) => {
           </div>
         ))}
       </div>
+
+      {showModal === true ? <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} close={() => setShowModal(false)} /> : ""}
     </div>
   );
 };

@@ -32,8 +32,6 @@ const NewestProducts = () => {
   const [newestProducts, setNewestProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tempData, setTempData] = useState([]);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -68,7 +66,7 @@ const NewestProducts = () => {
   };
 
   const handleAddToCart = (product) => {
-    dispatch(addCart({ ...product, color, size }));
+    dispatch(addCart(product));
   };
 
   return (
