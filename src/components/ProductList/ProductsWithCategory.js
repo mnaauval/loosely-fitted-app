@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FavoriteBorderOutlined, ShoppingCartOutlined, Visibility } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
-import { publicRequest } from "../utilities/requestMethods";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, getTotal } from "../redux/features/cartSlice";
-import QuickViewModal from "./QuickViewModal";
+import { addCart, getTotal } from "../../redux/features/cartSlice";
+import { publicRequest } from "../../utilities/requestMethods";
+import QuickViewModal from "../Modal/QuickViewModal";
 
 const Icon = styled.div`
   width: 40px;
@@ -23,7 +23,7 @@ const Icon = styled.div`
   }
 `;
 
-const Products = ({ filter, sort }) => {
+const ProductsWithCategory = ({ cat, filter, sort }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
@@ -31,20 +31,22 @@ const Products = ({ filter, sort }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tempData, setTempData] = useState([]);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
   const productsSum = filteredProducts.length;
 
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await publicRequest.get(`products`);
+        const res = await publicRequest.get(`/products?category=${cat}`);
         setProducts(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     getProducts();
-  }, []);
+  }, [cat]);
 
   useEffect(() => {
     // prettier-ignore
@@ -53,7 +55,7 @@ const Products = ({ filter, sort }) => {
         Object.entries(filter).every(([key, value]) => item[key].includes(value))
       )
     );
-  }, [products, filter]);
+  }, [products, cat, filter]);
 
   useEffect(() => {
     if (sort === "newest") {
@@ -69,6 +71,11 @@ const Products = ({ filter, sort }) => {
     dispatch(getTotal());
   }, [cart, dispatch]);
 
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+    console.log(showModal);
+  };
+
   const getData = (id, imageUrl, title, desc, price, color, size) => {
     let currentTempData = [id, imageUrl, title, desc, price, color, size];
     setTempData((item) => [1, ...currentTempData]);
@@ -77,13 +84,13 @@ const Products = ({ filter, sort }) => {
   };
 
   const handleAddToCart = (product) => {
-    dispatch(addCart(product));
+    dispatch(addCart({ ...product, color, size }));
   };
 
   return (
     <div>
       <p className="text-right text-gray-60 px-8">Showing {productsSum} products</p>
-      <h1 className="text-center text-4xl">{`All Category`.toUpperCase()}.</h1>
+      <h1 className="text-center text-4xl">{cat?.toUpperCase()}</h1>
       <div className="p-5 xs:flex hidden flex-wrap justify-between">
         {filteredProducts.map((product) => (
           <div key={product._id} className="flex-1 m-1.5 min-w-[280px] h-[22rem] flex items-center justify-center bg-[#f5fbfd] relative">
@@ -94,7 +101,12 @@ const Products = ({ filter, sort }) => {
                 <ShoppingCartOutlined />
               </Icon>
               {/* <NavLink to={`/product/${product._id}`}> */}
-              <Icon onClick={() => getData(product._id, product.imageUrl, product.title, product.desc, product.price, product.color, product.size)}>
+              <Icon
+                onClick={() => {
+                  openModal();
+                  getData(product._id, product.imageUrl, product.title, product.desc, product.price, product.color, product.size);
+                }}
+              >
                 <Visibility />
               </Icon>
               {/* </NavLink> */}
@@ -106,9 +118,10 @@ const Products = ({ filter, sort }) => {
         ))}
       </div>
 
-      {showModal === true ? <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} close={() => setShowModal(false)} /> : ""}
+      {/* {showModal === true ? <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} close={() => setShowModal(false)} /> : ""} */}
+      <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 };
 
-export default Products;
+export default ProductsWithCategory;

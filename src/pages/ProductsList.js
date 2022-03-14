@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Products from "../components/Products";
-import ProductsWithCategory from "../components/ProductsWithCategory";
-import RequiredScreen from "../components/RequiredScreen";
+import AllProducts from "../components/ProductList/AllProducts";
+import ProductsWithCategory from "../components/ProductList/ProductsWithCategory";
+import RequiredScreen from "../components/Utilities/RequiredScreen";
 
 const ProductsList = () => {
   const location = useLocation();
@@ -55,7 +55,7 @@ const ProductsList = () => {
             </select>
           </div>
         </div>
-        {cat ? <ProductsWithCategory cat={cat} filter={filter} sort={sort} /> : <Products filter={filter} sort={sort} />}
+        {cat ? <ProductsWithCategory cat={cat} filter={filter} sort={sort} /> : <AllProducts filter={filter} sort={sort} />}
       </div>
     </>
   );

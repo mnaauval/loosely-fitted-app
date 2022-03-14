@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import RequiredScreen from "../components/RequiredScreen";
 import { publicRequest } from "../utilities/requestMethods";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RequiredScreen from "../components/Utilities/RequiredScreen";
 
 const Container = styled.div`
   background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://images.pexels.com/photos/6984661/pexels-photo-6984661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;

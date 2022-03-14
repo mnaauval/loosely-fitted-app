@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 // import { Add, Remove } from "@mui/icons-material";
-import RequiredScreen from "../components/RequiredScreen";
 import { useLocation, useNavigate } from "react-router-dom";
 import { publicRequest, userRequest } from "../utilities/requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, decreaseCart, getTotal, increaseCart, submitCart, updateColorSize } from "../redux/features/cartSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RequiredScreen from "../components/Utilities/RequiredScreen";
 
 const FilterColor = styled.div`
   background-color: ${(props) => props.color};

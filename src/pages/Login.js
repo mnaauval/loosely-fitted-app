@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import RequiredScreen from "../components/RequiredScreen";
+import RequiredScreen from "../components/Utilities/RequiredScreen";
 import { login } from "../redux/features/userAPI";
 
 const Container = styled.div`

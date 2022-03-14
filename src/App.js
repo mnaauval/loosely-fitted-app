@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-d
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import Newsletter from "./components/Newsletter";
-import ScrollToTop from "./components/ScrollToTop";
+import ScrollToTop from "./components/Utilities/ScrollToTop";
 import SuccessPayment from "./components/SuccessPayment";
 import Cart from "./pages/Cart";
 import Home from "./pages/Home";

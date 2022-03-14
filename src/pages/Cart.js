@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import StripeCheckout from "react-stripe-checkout";
-import RequiredScreen from "../components/RequiredScreen";
 import { Add, Remove } from "@mui/icons-material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { publicRequest } from "../utilities/requestMethods";
 import { decreaseCart, getTotal, increaseCart } from "../redux/features/cartSlice";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import RequiredScreen from "../components/Utilities/RequiredScreen";
 
 const KEY = "pk_test_51KXNo4BnzSnZyZ7MtFcoNl1vypU22HmTC7WX76PKoDv1dpgy7hTMGToL3xA9F1nQyRirNVq04onkz5Ah4rK2pUEc002vRANYoZ";
 
@@ -40,7 +41,7 @@ const Cart = () => {
 
   const [stripeToken, setStripeToken] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [currentId, setCurrentId] = useState();
+
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
@@ -86,11 +87,6 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.totalPrice, navigate]);
-
-  const clickHandler = (e) => {
-    navigate("/products");
-  };
-
   return (
     <>
       <RequiredScreen />
@@ -103,54 +99,56 @@ const Cart = () => {
         <div className="sm:p-5 p-2.5 xs:block hidden">
           <h1 className="text-4xl font-light text-center">YOUR CART</h1>
           {/* Top */}
-          <div className="flex items-center sm:justify-between justify-center p-5">
+          <div className="flex items-center sm:justify-between justify-center py-5">
             <div className="sm:flex flex-col items-center hidden">
               {/* <span className="underline cursor-pointer my-0 mx-2.5">Shopping Bag {cart.products.length}</span> */}
-              <span className="underline cursor-pointer my-0 mx-2.5">Your Wishlist {2}</span>
+              <span className="underline cursor-pointer my-0">Your Wishlist {2}</span>
             </div>
           </div>
 
           {/* Bottom */}
-          <div className="flex justify-between md:flex-row flex-col">
+          <div className="flex justify-between lg:flex-row flex-col">
             {/* Cart List */}
-            <div className="grow-[3]">
+            <div className="grow-[3] ">
               {cart.products?.map((product) => (
-                <div key={product._id} className="flex justify-between md:flex-row flex-col">
-                  {/* Detail Product */}
-                  <div className="grow-[2] flex">
-                    <img src={product.imageUrl} alt="shoes" className="sm:w-[200px] w-28" />
-                    <div className="p-5 flex flex-col justify-around">
-                      <h3 className="text-2xl">
-                        {/* <b>Product: </b>  */}
-                        {product.title}
-                      </h3>
-                      {/* <span>
-                        <b>ID: </b> 
-                        {product._id}
-                      </span> */}
-                      <span className="flex items-center">
-                        {/* <b>Size: </b>  */}
-                        {product.size}
-                        {/* <button className="rounded-full ml-10">
-                          <EditOutlinedIcon />
-                        </button> */}
-                      </span>
-                      <span className="flex items-center">
-                        <ProductColor color={product.color} className="w-[20px] h-[20px] rounded-full"></ProductColor>
-                        {/* <button className="rounded-full ml-16 ">
-                          <EditOutlinedIcon />
-                        </button> */}
-                      </span>
+                <div className="mb-10">
+                  <hr className="border border-[#eee] w-3/4 mb-10" />
+                  <div key={product._id} className="flex md:items-start items-center justify-between md:flex-row flex-col mt-1">
+                    {/* Detail Product */}
+                    <div className="grow-[2] flex md:flex-row flex-col max-w-[800px]">
+                      <img src={product.imageUrl} alt={product.title} className="max-h-[200px] min-w-[200px] w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
+                      <div className="flex flex-col justify-center w-full">
+                        <div className="flex items-center">
+                          <h2 className="text-2xl ">{product.title}</h2>
+                          <button className="md:block hidden ml-5">
+                            <EditOutlinedIcon />
+                          </button>
+                        </div>
+                        <p className="flex items-center text-lg">
+                          <b className="text-base w-[70px]">Size: </b> {product.size}
+                        </p>
+                        <p className="flex items-center">
+                          <b className=" w-[65px]">Color: </b> <ProductColor color={product.color} className="w-[30px] h-[30px] rounded-full my-0"></ProductColor>
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  {/* Detail Price */}
-                  <div className="flex-1 flex items-center justify-center py-2">
-                    <div className="flex items-center font-bold mx-2">
-                      <Remove onClick={() => handleDecreaseQuantity(product)} className="cursor-pointer" />
-                      <span className="w-[30px] h-[30px] rounded-md border-2 flex items-center justify-center my-0 mx-1">{product.quantity}</span>
-                      <Add onClick={() => handleIncreaseQuantity(product)} className="cursor-pointer" />
+                    {/* Detail Price */}
+                    <div className="flex-1 flex flex-col items-center justify-center py-2">
+                      <div className="flex flex-row items-center">
+                        <button className="md:hidden block">
+                          <EditOutlinedIcon />
+                        </button>
+                        <button className="">
+                          <DeleteOutlinedIcon />
+                        </button>
+                        <div className="flex items-center font-bold mx-2 border-2 rounded-lg border-[#eee] p-1">
+                          <Remove onClick={() => handleDecreaseQuantity(product)} className="cursor-pointer" />
+                          <span className="w-[30px] h-[30px] rounded-md flex items-center justify-center my-0 mx-1">{product.quantity}</span>
+                          <Add onClick={() => handleIncreaseQuantity(product)} className="cursor-pointer" />
+                        </div>
+                      </div>
+                      <span className="text-3xl font-thin mx-2">$ {product.price * product.quantity}</span>
                     </div>
-                    <span className="text-3xl font-thin mx-2">{product.price * product.quantity}</span>
                   </div>
                 </div>
               ))}
@@ -158,7 +156,7 @@ const Cart = () => {
             </div>
 
             {/* Summary */}
-            <div className=" border-4 border-gray-400 rounded-md p-5 ">
+            <div className=" border-4 border-gray-400 rounded-md p-5 max-h-[480px]">
               <h1 className="text-4xl font-light text-center">ORDER SUMMARY</h1>
               <SummaryItem className="my-8 mx-0 flex justify-between">
                 <span>Sutotal</span>
@@ -198,7 +196,7 @@ const Cart = () => {
           </div>
 
           <div className="md:block flex items-center justify-center md:mt-0 mt-10 mb-5">
-            <Button onClick={clickHandler} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
+            <Button onClick={() => navigate("/products")} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
               CONTINUE SHOPPING
             </Button>
           </div>
