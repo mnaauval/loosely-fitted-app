@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const FilterColor = styled.div`
   background-color: ${(props) => props.color};
@@ -8,6 +10,7 @@ const FilterColor = styled.div`
 
 const QuickViewModal = ({ id, imageUrl, title, desc, price, color, size, showModal, setShowModal }) => {
   const modalRef = useRef();
+  const navigate = useNavigate();
 
   const closeModal = (e) => {
     if (modalRef.current === e.target) {
@@ -57,7 +60,7 @@ const QuickViewModal = ({ id, imageUrl, title, desc, price, color, size, showMod
                   <section className="mt-2">
                     <p className="text-gray-900 text-justify">{desc}</p>
                   </section>
-                  <section aria-labelledby="options-heading" className="mt-6">
+                  <section className="mt-6">
                     <div>
                       <h3 className="text-md text-gray-900 font-medium">Color</h3>
                       <div className="flex items-center">
@@ -72,8 +75,14 @@ const QuickViewModal = ({ id, imageUrl, title, desc, price, color, size, showMod
                       {size.map((s) => {
                         return <button className=" px-2.5 py-1.5 mt-1.5 mr-5 border-2 border-gray-400 rounded-md w-16">{s}</button>;
                       })}
+                      <button onClick={() => navigate(`/product/${id}`)} className="sm:inline-block hidden px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+                        Go to product <ArrowForwardOutlinedIcon className="h-6 w-6" />
+                      </button>
                     </div>
                   </section>
+                  <button onClick={() => navigate(`/product/${id}`)} className="w-full sm:hidden px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+                    <ArrowForwardOutlinedIcon className="h-6 w-6" />
+                  </button>
                 </div>
               </div>
             </div>

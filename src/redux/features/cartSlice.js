@@ -14,12 +14,14 @@ const cartSlice = createSlice({
     addCart: (state, action) => {
       const itemIndex = state.products.findIndex((item) => item._id === action.payload._id);
       if (itemIndex >= 0) {
+        // if item already in array cart i.e in cart[0]
         state.products[itemIndex].quantity += 1;
         // state.products[itemIndex].cartColor = action.payload.color;
         // state.products[itemIndex].cartSisze = action.payload.size;
         state.products[itemIndex].color = action.payload.color;
         state.products[itemIndex].size = action.payload.size;
       } else {
+        // if item not exist in cart, no element array matches with item id
         // const newItem = { ...action.payload, quantity: 1, cartColor: action.payload.color, cartSisze: action.payload.size };
         const newItem = { ...action.payload, quantity: 1 };
         state.products.push(newItem);
@@ -55,8 +57,8 @@ const cartSlice = createSlice({
     },
     clearCart: (state) => {
       state.products = [];
-      state.quantity = 0;
       state.totalPrice = 0;
+      state.totalQuantity = 0;
     },
     getTotal: (state) => {
       const { total, qty } = state.products.reduce(

@@ -7,10 +7,11 @@ import { Add, Remove } from "@mui/icons-material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { publicRequest } from "../utilities/requestMethods";
-import { decreaseCart, getTotal, increaseCart } from "../redux/features/cartSlice";
+import { decreaseCart, getTotal, increaseCart, removeFromCart, updateColorSize } from "../redux/features/cartSlice";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import RequiredScreen from "../components/Utilities/RequiredScreen";
+import SizeColorModal from "../components/Modal/SizeColorModal";
 
 const KEY = "pk_test_51KXNo4BnzSnZyZ7MtFcoNl1vypU22HmTC7WX76PKoDv1dpgy7hTMGToL3xA9F1nQyRirNVq04onkz5Ah4rK2pUEc002vRANYoZ";
 
@@ -33,36 +34,55 @@ const SummaryItem = styled.div`
 `;
 
 const Cart = () => {
-  toast.configure();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  toast.configure();
   const cart = useSelector((state) => state.cart);
 
   const [stripeToken, setStripeToken] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal((prev) => !prev);
-  };
+  const [tempData, setTempData] = useState([]);
 
   const shipping = 30;
   const discount = -15;
   const tax = 30;
 
+  useEffect(() => {
+    dispatch(getTotal());
+  }, [cart, dispatch]);
+
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+    // console.log(showModal);
+  };
+  const getData = (id) => {
+    let currentTempData = [id];
+    setTempData((item) => [1, ...currentTempData]);
+    // console.log(tempData);
+    return setShowModal(true);
+  };
+
   const handleToken = (token) => {
     setStripeToken(token);
   };
+
   const handleIncreaseQuantity = (product) => {
     dispatch(increaseCart(product));
   };
   const handleDecreaseQuantity = (product) => {
-    dispatch(decreaseCart(product));
+    if (product.quantity > 1) {
+      dispatch(decreaseCart(product));
+    } else if (product.quantity === 1) {
+      if (window.confirm(`Are you sure want to remove ${product.title} from cart?`) == true) {
+        dispatch(removeFromCart(product));
+      }
+    }
   };
-
-  useEffect(() => {
-    dispatch(getTotal());
-  }, [cart, dispatch]);
+  const handleRemoveItem = (product) => {
+    if (window.confirm(`Are you sure want to remove ${product.title} from cart?`) == true) {
+      dispatch(removeFromCart(product));
+    }
+  };
 
   useEffect(() => {
     const makeRequest = async () => {
@@ -87,6 +107,7 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.totalPrice, navigate]);
+
   return (
     <>
       <RequiredScreen />
@@ -120,7 +141,13 @@ const Cart = () => {
                       <div className="flex flex-col justify-center w-full">
                         <div className="flex items-center">
                           <h2 className="text-2xl ">{product.title}</h2>
-                          <button className="md:block hidden ml-5">
+                          <button
+                            onClick={() => {
+                              openModal();
+                              getData(product._id);
+                            }}
+                            className="md:block hidden ml-5"
+                          >
                             <EditOutlinedIcon />
                           </button>
                         </div>
@@ -135,16 +162,22 @@ const Cart = () => {
                     {/* Detail Price */}
                     <div className="flex-1 flex flex-col items-center justify-center py-2">
                       <div className="flex flex-row items-center">
-                        <button className="md:hidden block">
+                        <button
+                          onClick={() => {
+                            openModal();
+                            getData(product._id);
+                          }}
+                          className="md:hidden block"
+                        >
                           <EditOutlinedIcon />
                         </button>
-                        <button className="">
+                        <button onClick={() => handleRemoveItem(product)} className="mr-5">
                           <DeleteOutlinedIcon />
                         </button>
-                        <div className="flex items-center font-bold mx-2 border-2 rounded-lg border-[#eee] p-1">
-                          <Remove onClick={() => handleDecreaseQuantity(product)} className="cursor-pointer" />
-                          <span className="w-[30px] h-[30px] rounded-md flex items-center justify-center my-0 mx-1">{product.quantity}</span>
-                          <Add onClick={() => handleIncreaseQuantity(product)} className="cursor-pointer" />
+                        <div className="flex items-center font-bold mx-2 border-2 rounded-lg border-[#eee] ">
+                          <Remove onClick={() => handleDecreaseQuantity(product)} className="cursor-pointer p-1.5" />
+                          <span className="w-[30px] h-[30px] rounded-md flex items-center justify-center my-0 mx-1 p-1.5">{product.quantity}</span>
+                          <Add onClick={() => handleIncreaseQuantity(product)} className="cursor-pointer p-1.5" />
                         </div>
                       </div>
                       <span className="text-3xl font-thin mx-2">$ {product.price * product.quantity}</span>
@@ -202,6 +235,7 @@ const Cart = () => {
           </div>
         </div>
       )}
+      <SizeColorModal id={tempData[1]} showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };
