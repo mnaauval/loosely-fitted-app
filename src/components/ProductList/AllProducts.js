@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FavoriteBorderOutlined, ShoppingCartOutlined, Visibility } from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, getTotal } from "../../redux/features/cartSlice";
 import { publicRequest } from "../../utilities/requestMethods";
@@ -25,6 +25,8 @@ const Icon = styled.div`
 
 const AllProducts = ({ filter, sort }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoggedOut } = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 
   const [products, setProducts] = useState([]);
@@ -97,22 +99,36 @@ const AllProducts = ({ filter, sort }) => {
             <div className="w-52 h-52 rounded-full bg-white absolute"></div>
             <img src={product.imageUrl} alt={product.title} className="h-3/4 z-[2]" />
             <div className="w-full h-full absolute top-0 left-0 bg-black/20 z-[3] flex items-center justify-center transition duration-500 ease cursor-pointer opacity-0 hover:opacity-100">
-              <Icon onClick={() => handleAddToCart(product)}>
-                <ShoppingCartOutlined />
-              </Icon>
-              {/* <NavLink to={`/product/${product._id}`}> */}
-              <Icon
-                onClick={() => {
-                  openModal();
-                  getData(product._id, product.imageUrl, product.title, product.desc, product.price, product.color, product.size);
-                }}
-              >
-                <Visibility />
-              </Icon>
-              {/* </NavLink> */}
-              <Icon>
-                <FavoriteBorderOutlined />
-              </Icon>
+              {isLoggedOut ? (
+                <>
+                  <Icon onClick={() => navigate("/login")}>
+                    <ShoppingCartOutlined />
+                  </Icon>
+                  <Icon onClick={() => navigate("/login")}>
+                    <Visibility />
+                  </Icon>
+                  <Icon onClick={() => navigate("/login")}>
+                    <FavoriteBorderOutlined />
+                  </Icon>
+                </>
+              ) : (
+                <>
+                  <Icon onClick={() => handleAddToCart(product)}>
+                    <ShoppingCartOutlined />
+                  </Icon>
+                  <Icon
+                    onClick={() => {
+                      openModal();
+                      getData(product._id, product.imageUrl, product.title, product.desc, product.price, product.color, product.size);
+                    }}
+                  >
+                    <Visibility />
+                  </Icon>
+                  <Icon>
+                    <FavoriteBorderOutlined />
+                  </Icon>
+                </>
+              )}
             </div>
           </div>
         ))}

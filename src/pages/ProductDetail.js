@@ -13,11 +13,11 @@ const FilterColor = styled.div`
 `;
 
 const ProductDetail = () => {
+  toast.configure();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const id = location.pathname.split("/")[2];
-  toast.configure();
   const { isLoggedOut } = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
 

@@ -132,9 +132,9 @@ const Cart = () => {
             {/* Cart List */}
             <div className="grow-[3] ">
               {cart.products?.map((product) => (
-                <div className="mb-10">
+                <div key={product._id} className="mb-10">
                   <hr className="border border-[#eee] w-3/4 mb-10" />
-                  <div key={product._id} className="flex md:items-start items-center justify-between md:flex-row flex-col mt-1">
+                  <div className="flex md:items-start items-center justify-between md:flex-row flex-col mt-1">
                     {/* Detail Product */}
                     <div className="grow-[2] flex md:flex-row flex-col max-w-[800px]">
                       <img src={product.imageUrl} alt={product.title} className="max-h-[200px] min-w-[200px] w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
@@ -151,12 +151,12 @@ const Cart = () => {
                             <EditOutlinedIcon />
                           </button>
                         </div>
-                        <p className="flex items-center text-lg">
+                        <div className="flex items-center text-lg">
                           <b className="text-base w-[70px]">Size: </b> {product.size}
-                        </p>
-                        <p className="flex items-center">
+                        </div>
+                        <div className="flex items-center">
                           <b className=" w-[65px]">Color: </b> <ProductColor color={product.color} className="w-[30px] h-[30px] rounded-full my-0"></ProductColor>
-                        </p>
+                        </div>
                       </div>
                     </div>
                     {/* Detail Price */}

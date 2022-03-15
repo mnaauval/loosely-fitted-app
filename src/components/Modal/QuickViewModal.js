@@ -73,7 +73,11 @@ const QuickViewModal = ({ id, imageUrl, title, desc, price, color, size, showMod
                     <div className="mt-5">
                       <h3 className="text-lg text-gray-900 font-medium">Size</h3>
                       {size.map((s) => {
-                        return <button className=" px-2.5 py-1.5 mt-1.5 mr-5 border-2 border-gray-400 rounded-md w-16">{s}</button>;
+                        return (
+                          <button key={s} className=" px-2.5 py-1.5 mt-1.5 mr-5 border-2 border-gray-400 rounded-md w-16">
+                            {s}
+                          </button>
+                        );
                       })}
                       <button onClick={() => navigate(`/product/${id}`)} className="sm:inline-block hidden px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
                         Go to product <ArrowForwardOutlinedIcon className="h-6 w-6" />
