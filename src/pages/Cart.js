@@ -6,6 +6,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { Add, Remove } from "@mui/icons-material";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import { publicRequest } from "../utilities/requestMethods";
 import { decreaseCart, getTotal, increaseCart, removeFromCart, updateColorSize } from "../redux/features/cartSlice";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
@@ -73,15 +74,37 @@ const Cart = () => {
     if (product.quantity > 1) {
       dispatch(decreaseCart(product));
     } else if (product.quantity === 1) {
-      if (window.confirm(`Are you sure want to remove ${product.title} from cart?`) == true) {
-        dispatch(removeFromCart(product));
-      }
+      Swal.fire({
+        title: "Are you sure?",
+        html: `<b>${product.title}</b> will be deleted from cart`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          dispatch(removeFromCart(product));
+        }
+      });
     }
   };
   const handleRemoveItem = (product) => {
-    if (window.confirm(`Are you sure want to remove ${product.title} from cart?`) == true) {
-      dispatch(removeFromCart(product));
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      html: `<b>${product.title}</b> will be deleted from cart`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        dispatch(removeFromCart(product));
+      }
+    });
   };
 
   useEffect(() => {
@@ -92,7 +115,7 @@ const Cart = () => {
           amount: (cart.totalPrice + shipping + discount + tax) * 100,
         });
         console.log(res.data);
-        console.log(res.status);
+        // console.log(res.status);
         toast("Successful payment", { type: "success" });
         navigate("/success", {
           state: {
@@ -137,7 +160,7 @@ const Cart = () => {
                   <div className="flex md:items-start items-center justify-between md:flex-row flex-col mt-1">
                     {/* Detail Product */}
                     <div className="grow-[2] flex md:flex-row flex-col max-w-[800px]">
-                      <img src={product.imageUrl} alt={product.title} className="max-h-[200px] min-w-[200px] w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
+                      <img src={product.imageUrl} alt={product.title} className="md:max-h-[200px] max-h-[400px] min-w-[200px] md:w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
                       <div className="flex flex-col justify-center w-full">
                         <div className="flex items-center">
                           <h2 className="text-2xl ">{product.title}</h2>
@@ -189,30 +212,31 @@ const Cart = () => {
             </div>
 
             {/* Summary */}
-            <div className=" border-4 border-gray-400 rounded-md p-5 max-h-[480px]">
-              <h1 className="text-4xl font-light text-center">ORDER SUMMARY</h1>
-              <SummaryItem className="my-8 mx-0 flex justify-between">
-                <span>Sutotal</span>
-                <span>$ {cart.totalPrice}</span>
-              </SummaryItem>
-              <SummaryItem className="my-8 mx-0 flex justify-between">
-                <span>Shipping</span>
-                <span>{shipping}</span>
-              </SummaryItem>
-              <SummaryItem className="my-8 mx-0 flex justify-between">
-                <span>Discount</span>
-                <span>{discount}</span>
-              </SummaryItem>
-              <SummaryItem className="my-8 mx-0 flex justify-between">
-                <span>Tax</span>
-                <span>{tax}</span>
-              </SummaryItem>
-              <SummaryItem type="total" className="my-8 mx-0 flex justify-between">
-                <span>Total</span>
-                <span>$ {cart.totalPrice + shipping + discount + tax}</span>
-              </SummaryItem>
-              {/* prettier-ignore */}
-              <StripeCheckout 
+            <div className="lg:inline-block flex items-center md:justify-end justify-center">
+              <div className="border-4 border-gray-400 rounded-md p-5 max-h-[480px] max-w-[400px]">
+                <h1 className="text-4xl font-light text-center">ORDER SUMMARY</h1>
+                <SummaryItem className="my-8 mx-0 flex justify-between">
+                  <span>Sutotal</span>
+                  <span>$ {cart.totalPrice}</span>
+                </SummaryItem>
+                <SummaryItem className="my-8 mx-0 flex justify-between">
+                  <span>Shipping</span>
+                  <span>{shipping}</span>
+                </SummaryItem>
+                <SummaryItem className="my-8 mx-0 flex justify-between">
+                  <span>Discount</span>
+                  <span>{discount}</span>
+                </SummaryItem>
+                <SummaryItem className="my-8 mx-0 flex justify-between">
+                  <span>Tax</span>
+                  <span>{tax}</span>
+                </SummaryItem>
+                <SummaryItem type="total" className="my-8 mx-0 flex justify-between">
+                  <span>Total</span>
+                  <span>$ {cart.totalPrice + shipping + discount + tax}</span>
+                </SummaryItem>
+                {/* prettier-ignore */}
+                <StripeCheckout 
             stripeKey={KEY} 
             token={handleToken} 
             name="Loosely Fitted" 
@@ -225,6 +249,7 @@ const Cart = () => {
                 CHECKOUT NOW
               </Button>
             </StripeCheckout>
+              </div>
             </div>
           </div>
 

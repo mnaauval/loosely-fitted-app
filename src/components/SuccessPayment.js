@@ -40,10 +40,6 @@ const SuccessPayment = () => {
     stripeData && createOrder();
   }, [cart, stripeData, currentUser]);
 
-  const clickHandler = () => {
-    window.location.href = "/";
-  };
-
   return (
     <div className="flex items-center justify-center py-80">
       {orderId ? (
@@ -57,7 +53,7 @@ const SuccessPayment = () => {
             <div className="text-sm font-medium ml-3">Success Payment.</div>
           </div>
           <div className="text-sm tracking-wide text-gray-500 mt-4 sm:mt-0 sm:ml-4">{`Your Payment was Successful. Your order number is ${orderId}`}</div>
-          <div onClick={clickHandler} className="absolute sm:relative sm:top-auto sm:right-auto ml-5 right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">
+          <div onClick={() => navigate("/")} className="absolute sm:relative sm:top-auto sm:right-auto ml-5 right-4 top-4 text-gray-400 hover:text-gray-800 cursor-pointer">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>

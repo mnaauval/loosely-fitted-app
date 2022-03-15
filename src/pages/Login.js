@@ -43,11 +43,11 @@ const Login = () => {
             {error && <p className="text-red-500 text-xs italic mb-3 mt-1">Something went wrong...</p>}
           </form>
 
-          <div className="flex flex-col mt-6">
-            <NavLink className="my-1 mx-0 text-sm hover:underline cursor-pointer" to="login">
+          <div className="flex flex-col items-center justify-center mt-6">
+            {/* <NavLink className="my-1 mx-0 text-sm hover:underline cursor-pointer" to="login">
               FORGET YOUR PASSWORD?
-            </NavLink>
-            <NavLink className="my-1 mx-0 text-sm hover:underline cursor-pointer" to="register">
+            </NavLink> */}
+            <NavLink className="my-1 mx-0 text-sm hover:underline cursor-pointer" to="/register">
               DO NOT HAVE ACCOUNT?
             </NavLink>
           </div>

@@ -66,7 +66,7 @@ const Register = () => {
               </div>
               <div className="ml-3 text-sm">
                 <label htmlFor="terms" className="font-medium text-gray-900 ">
-                  I agree with the
+                  I agree with the &nbsp;
                   <NavLink to="/register" className="text-blue-600 hover:underline ">
                     terms and conditions
                   </NavLink>

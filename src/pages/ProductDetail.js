@@ -4,8 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { publicRequest } from "../utilities/requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, getTotal, updateColorSize } from "../redux/features/cartSlice";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
 import RequiredScreen from "../components/Utilities/RequiredScreen";
 
 const FilterColor = styled.div`
@@ -13,7 +12,6 @@ const FilterColor = styled.div`
 `;
 
 const ProductDetail = () => {
-  toast.configure();
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,13 +48,23 @@ const ProductDetail = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addCart({ ...product, color, size }));
+    Swal.fire({
+      text: "Cart added",
+      icon: "success",
+      timer: 1500,
+      confirmButtonText: "OK",
+    });
   };
   const handleUpdate = (product) => {
     dispatch(updateColorSize({ ...product, color, size }));
   };
 
   const handleColor = (c) => {
-    alert("You pick " + c);
+    Swal.fire({
+      text: "You choose color: " + c,
+      timer: 1500,
+      confirmButtonText: "OK",
+    });
     setColor(c);
   };
 
@@ -65,13 +73,13 @@ const ProductDetail = () => {
       <RequiredScreen />
       <div className="sm:p-12 p-2.5 xs:flex hidden md:flex-row flex-col ">
         <div className="flex-1 bg-[#f5fbfd]  rounded-xl">
-          <img src={product?.imageUrl} alt={product.title} className="w-full sm:h-[90vh] h-[40vh] object-cover" />
+          <img src={product?.imageUrl} alt={product.title} className="max-h-[700px] min-w-[200px] w-full object-cover" />
         </div>
 
         <div className="flex-1 md:px-12 md:py-0 p-2.5">
           <div className="flex justify-between">
-            <h1 className="font-bold text-4xl">{product?.title}</h1>
-            <span className="font-bold text-4xl">$ {product?.price}</span>
+            <h1 className="font-bold lg:text-4xl text-2xl">{product?.title}</h1>
+            <span className="font-bold lg:text-4xl text-2xl">$ {product?.price}</span>
           </div>
           <div className="mt-10">
             <p className="text-gray-900 text-justify">{product?.desc}</p>
@@ -117,11 +125,29 @@ const ProductDetail = () => {
                 ADD TO CART
               </button>
             ) : !color ? (
-              <button onClick={() => alert("Please choose a COLOR ")} className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+              <button
+                onClick={() =>
+                  Swal.fire({
+                    text: "Please choose COLOR",
+                    icon: "warning",
+                    confirmButtonText: "OK",
+                  })
+                }
+                className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+              >
                 ADD TO CART
               </button>
             ) : !size ? (
-              <button onClick={() => alert("Please choose a SIZE ")} className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+              <button
+                onClick={() =>
+                  Swal.fire({
+                    text: "Please choose SIZE",
+                    icon: "warning",
+                    confirmButtonText: "OK",
+                  })
+                }
+                className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+              >
                 ADD TO CART
               </button>
             ) : (
