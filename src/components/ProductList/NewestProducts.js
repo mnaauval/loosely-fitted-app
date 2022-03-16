@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCart, getTotal } from "../../redux/features/cartSlice";
 import { publicRequest } from "../../utilities/requestMethods";
 import QuickViewModal from "../Modal/QuickViewModal";
+import Swal from "sweetalert2";
 
 const Icon = styled.button`
   width: 40px;
@@ -70,6 +71,12 @@ const NewestProducts = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addCart({ ...product, color, size }));
+    Swal.fire({
+      text: "Cart added",
+      icon: "success",
+      timer: 1500,
+      confirmButtonText: "OK",
+    });
   };
 
   return (

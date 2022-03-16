@@ -16,7 +16,10 @@ const navigation = [
   { name: "Sign-in", path: "/login" },
 ];
 
-const navigation2 = [{ name: "Products", path: "/products" }];
+const navigation2 = [
+  { name: "Products", path: "/products" },
+  { name: "Transaction", path: "/order" },
+];
 
 const Navbar = () => {
   const { totalQuantity } = useSelector((state) => state.cart);

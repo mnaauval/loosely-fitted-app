@@ -56,10 +56,10 @@ const Register = () => {
             </div> */}
             {/* <Input className="sm:hidden" type="text" placeholder="First Name" />
             <Input className="sm:hidden" type="text" placeholder="Last Name" /> */}
-            <Input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
-            <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-            <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <Input type="password" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
+            <Input type="text" placeholder="username" onChange={(e) => setUsername(e.target.value)} />
+            <Input type="email" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+            <Input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
+            <Input type="password" placeholder="confirm password" onChange={(e) => setConfirmPassword(e.target.value)} />
             <div className="flex items-start my-5">
               <div className="flex items-center h-5">
                 <input id="terms" type="checkbox" className="w-4 h-4 bg-gray-50 rounded border border-gray-300" required />

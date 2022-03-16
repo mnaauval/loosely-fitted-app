@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import ProductDetail from "./pages/ProductDetail";
 import ProductsList from "./pages/ProductsList";
 import Register from "./pages/Register";
+import Transaction from "./pages/Transaction";
 
 function App() {
   const user = useSelector((state) => state.user.currentUser);
@@ -24,6 +25,7 @@ function App() {
         <Route path="/products" element={<ProductsList />} />
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<Transaction />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
         <Route path="/success" element={<SuccessPayment />} />

@@ -163,7 +163,9 @@ const Cart = () => {
                       <img src={product.imageUrl} alt={product.title} className="md:max-h-[200px] max-h-[400px] min-w-[200px] md:w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
                       <div className="flex flex-col justify-center w-full">
                         <div className="flex items-center">
-                          <h2 className="text-2xl ">{product.title}</h2>
+                          <h2 title={product.title} className="text-2xl truncate max-w-[500px]">
+                            {product.title}
+                          </h2>
                           <button
                             onClick={() => {
                               openModal();
