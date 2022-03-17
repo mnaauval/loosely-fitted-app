@@ -12,6 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import ExpandMoreOutlinedIcon from "@mui/icons-material/ExpandMoreOutlined";
+import CategoryIcon from "@mui/icons-material/Category";
 import { publicRequest } from "../utilities/requestMethods";
 
 const navigation = [
@@ -88,8 +89,26 @@ const Navbar = () => {
                   {/* Categories */}
                   {!isLoggedOut && (
                     <>
-                      <Menu as="div" className="sm:mx-10 ml-0 mr-10 relative z-10">
+                      <Menu as="div" className="mx-10 sm:inline-block hidden relative z-10">
                         <Menu.Button className="flex rounded-full focus:outline-none ">Categories</Menu.Button>
+                        <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
+                          <Menu.Items className="absolute -left-1.5 w-40 mt-3.5 py-3.5 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {newCategories.map((category) => (
+                              <Menu.Item key={category}>
+                                {({ active }) => (
+                                  <NavLink to={`/products/${category}`} className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} inline-block text-center w-full py-2 text-md`}>
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                                  </NavLink>
+                                )}
+                              </Menu.Item>
+                            ))}
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                      <Menu as="div" className="sm:hidden inline-block relative z-10">
+                        <Menu.Button className="flex rounded-full focus:outline-none ">
+                          <CategoryIcon className="text-gray-500" />
+                        </Menu.Button>
                         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
                           <Menu.Items className="absolute -left-1.5 w-40 mt-3.5 py-3.5 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             {newCategories.map((category) => (
@@ -148,7 +167,7 @@ const Navbar = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <NavLink to="/" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <PersonIcon className="w-5 h-5 mr-3.5" />
+                                    <PersonIcon className="mr-3.5" />
                                     User Profile
                                   </NavLink>
                                 )}
@@ -156,7 +175,7 @@ const Navbar = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <NavLink to="/order" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <ReceiptOutlinedIcon className="w-5 h-5 mr-3.5" />
+                                    <ReceiptOutlinedIcon className="mr-3.5" />
                                     Transaction
                                   </NavLink>
                                 )}
@@ -164,7 +183,7 @@ const Navbar = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <button onClick={logoutHandler} className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <LogoutIcon className="w-5 h-5 mr-3.5" />
+                                    <LogoutIcon className="mr-3.5" />
                                     Logout
                                   </button>
                                 )}
