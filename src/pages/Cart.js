@@ -160,10 +160,10 @@ const Cart = () => {
                   <div className="flex md:items-start items-center justify-between md:flex-row flex-col mt-1">
                     {/* Detail Product */}
                     <div className="grow-[2] flex md:flex-row flex-col max-w-[800px]">
-                      <img src={product.imageUrl} alt={product.title} className="md:max-h-[200px] max-h-[400px] min-w-[200px] md:w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
+                      <img src={product.imageUrl} alt={product.title} className="md:max-h-[200px] max-h-[400px] min-w-[200px] md:w-28 w-28 bg-[#F7F7F7] mr-10 rounded-xl" />
                       <div className="flex flex-col justify-center w-full">
                         <div className="flex items-center">
-                          <h2 title={product.title} className="text-2xl truncate max-w-[500px]">
+                          <h2 title={product.title} className="text-2xl truncate md:max-w-[500px] max-w-[200px]">
                             {product.title}
                           </h2>
                           <button
@@ -180,7 +180,7 @@ const Cart = () => {
                           <b className="text-base w-[70px]">Size: </b> {product.size}
                         </div>
                         <div className="flex items-center">
-                          <b className=" w-[65px]">Color: </b> <ProductColor color={product.color} className="w-[30px] h-[30px] rounded-full my-0"></ProductColor>
+                          <b className=" w-[65px]">Color: </b> <ProductColor color={product.color} className="w-[30px] h-[30px] rounded-full my-0 border-2 border-gray-200"></ProductColor>
                         </div>
                       </div>
                     </div>

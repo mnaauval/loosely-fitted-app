@@ -83,7 +83,7 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                     </div> */}
                     <div className="flex">
                       {product.color?.map((c) => {
-                        return <FilterColor key={c} color={c} onClick={() => setColor(c)} className="w-[30px] h-[30px] rounded-full my-0 mx-1 cursor-pointer"></FilterColor>;
+                        return <FilterColor key={c} color={c} onClick={() => setColor(c)} className="w-[30px] h-[30px] rounded-full my-0 mx-1 cursor-pointer border-2 border-gray-200"></FilterColor>;
                       })}
                     </div>
                   </div>
