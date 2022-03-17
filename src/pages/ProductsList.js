@@ -9,6 +9,7 @@ const ProductsList = () => {
   const cat = location.pathname.split("/")[2];
   const [filter, setFilter] = useState({});
   const [sort, setSort] = useState("newest");
+  console.log(cat);
 
   const handleFilters = (e) => {
     const value = e.target.value;
@@ -55,7 +56,7 @@ const ProductsList = () => {
             </select>
           </div>
         </div>
-        {cat ? <ProductsWithCategory cat={cat} filter={filter} sort={sort} /> : <AllProducts filter={filter} sort={sort} />}
+        {cat === "All" ? <AllProducts filter={filter} sort={sort} /> : <ProductsWithCategory cat={cat} filter={filter} sort={sort} />}
       </div>
     </>
   );

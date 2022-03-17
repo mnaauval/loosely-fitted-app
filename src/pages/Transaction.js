@@ -5,6 +5,7 @@ const Transaction = () => {
   return (
     <>
       <RequiredScreen />
+      Transaction
     </>
   );
 };
