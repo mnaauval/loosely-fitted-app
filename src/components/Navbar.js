@@ -237,6 +237,9 @@ const Navbar = () => {
                           {nav.name}
                         </Disclosure.Button>
                       ))}
+                      <button onClick={logoutHandler} className="w-full block px-3 py-2 font-medium text-center hover:bg-teal-600 hover:text-white">
+                        Logout
+                      </button>
                     </div>
                   </div>
                 )}
