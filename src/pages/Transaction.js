@@ -31,7 +31,7 @@ const Transaction = () => {
   // const width = "25%";
 
   return (
-    <div className="bg-[#F9FAFB]">
+    <div className="bg-[#F9FAFB] overflow-x-hidden">
       <RequiredScreen />
       <div className="sm:p-8 px-0 py-2.5 xs:block hidden">
         {orders.map((order) => (
