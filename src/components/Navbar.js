@@ -21,7 +21,7 @@ const navigation = [
 ];
 
 const navigation2 = [
-  { name: "Your Profile", path: "/" },
+  // { name: "Your Profile", path: "/" },
   { name: "Transaction", path: "/order" },
 ];
 
@@ -90,7 +90,9 @@ const Navbar = () => {
                   {!isLoggedOut && (
                     <>
                       <Menu as="div" className="mx-10 sm:inline-block hidden relative z-10">
-                        <Menu.Button className="flex rounded-full focus:outline-none ">Categories</Menu.Button>
+                        <Menu.Button className="flex rounded-full focus:outline-none ">
+                          <p className="hover:text-teal-600 text-lg">Categories</p>
+                        </Menu.Button>
                         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
                           <Menu.Items className="absolute -left-1.5 w-40 mt-3.5 py-3.5 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             {newCategories.map((category) => (
@@ -156,34 +158,36 @@ const Navbar = () => {
                         </NavLink>
                         {/* Profile Icon*/}
                         <Menu as="div" className="sm:block hidden mx-3.5 relative z-10">
-                          <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none ">
+                          <Menu.Button className="bg-gray-800 flex rounded-full focus:outline-none ">
                             <div className="w-8 h-8">
                               <img className="w-full rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="profile" />
                             </div>
                           </Menu.Button>
                           <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
                             <Menu.Items className="absolute -right-1.5 w-56 mt-3.5 py-3.5 origin-top-right bg-white divide-y divide-gray-200 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                              <p className="text-center mb-3.5">{currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1)}</p>
-                              <Menu.Item>
+                              <NavLink to="/" className="block text-lg font-semibold text-center mb-3.5 hover:text-teal-600">
+                                {currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1)}
+                              </NavLink>
+                              {/* <Menu.Item>
                                 {({ active }) => (
-                                  <NavLink to="/" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <PersonIcon className="mr-3.5 text-gray-500 " />
+                                  <NavLink to="/" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2`}>
+                                    <PersonIcon className="mr-3.5 " />
                                     User Profile
                                   </NavLink>
                                 )}
-                              </Menu.Item>
+                              </Menu.Item> */}
                               <Menu.Item>
                                 {({ active }) => (
-                                  <NavLink to="/order" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <ReceiptOutlinedIcon className="mr-3.5 text-gray-500" />
+                                  <NavLink to="/order" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2`}>
+                                    <ReceiptOutlinedIcon className="mr-3.5" />
                                     Transaction
                                   </NavLink>
                                 )}
                               </Menu.Item>
                               <Menu.Item>
                                 {({ active }) => (
-                                  <button onClick={logoutHandler} className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <LogoutIcon className="mr-3.5 text-gray-500" />
+                                  <button onClick={logoutHandler} className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2`}>
+                                    <LogoutIcon className="mr-3.5" />
                                     Logout
                                   </button>
                                 )}

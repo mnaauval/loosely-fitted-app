@@ -24,12 +24,18 @@ const SuccessPayment = () => {
           userId: currentUser._id,
           products: cart.products.map((item) => ({
             productId: item._id,
+            name: item.title,
+            price: item.price,
+            preview: item.imageUrl,
+            size: item.size,
+            color: item.color,
             quantity: item.quantity,
           })),
           amount: cart.totalPrice,
           address: stripeData.billing_details.address,
         });
         setOrderId(res.data._id);
+        console.log(res.data);
         dispatch(clearCart());
         toast("Order success", { type: "success" });
       } catch (error) {

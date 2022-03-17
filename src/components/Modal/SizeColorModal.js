@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Swal from "sweetalert2";
 import { updateColorSize } from "../../redux/features/cartSlice";
 import { publicRequest } from "../../utilities/requestMethods";
 
@@ -29,11 +30,15 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
   }, [id]);
 
   useEffect(() => {
-    dispatch(updateColorSize({ ...product, color, size }));
+    if (color && size) {
+      dispatch(updateColorSize({ ...product, color, size }));
+    }
   }, [color, size]);
 
   const handleUpdate = (product) => {
-    dispatch(updateColorSize({ ...product, color, size }));
+    if (color && size) {
+      dispatch(updateColorSize({ ...product, color, size }));
+    }
   };
 
   const modalRef = useRef();
@@ -69,9 +74,39 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
             {/* Content Wrapper */}
             <div className="w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
               {/* Button X */}
-              <button onClick={() => setShowModal(false)} type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
-                <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
-              </button>
+              {!color ? (
+                <button
+                  onClick={() =>
+                    Swal.fire({
+                      text: "Please choose COLOR",
+                      icon: "warning",
+                      confirmButtonText: "OK",
+                    })
+                  }
+                  type="button"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                >
+                  <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              ) : !size ? (
+                <button
+                  onClick={() =>
+                    Swal.fire({
+                      text: "Please choose SIZE",
+                      icon: "warning",
+                      confirmButtonText: "OK",
+                    })
+                  }
+                  type="button"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                >
+                  <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              ) : (
+                <button onClick={() => setShowModal(false)} type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
+                  <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
+              )}
               {/* Content Container */}
               <div className="w-full grid grid-cols-1 gap-y-3.5 gap-x-12 items-start">
                 <div className="col-span-8">
@@ -106,9 +141,37 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                   {/* <button onClick={() => handleUpdate(product)} className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
                     Update product
                   </button> */}
-                  <button onClick={() => setShowModal(false)} className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
-                    OK
-                  </button>
+                  {!color ? (
+                    <button
+                      onClick={() =>
+                        Swal.fire({
+                          text: "Please choose COLOR",
+                          icon: "warning",
+                          confirmButtonText: "OK",
+                        })
+                      }
+                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+                    >
+                      ADD TO CART
+                    </button>
+                  ) : !size ? (
+                    <button
+                      onClick={() =>
+                        Swal.fire({
+                          text: "Please choose SIZE",
+                          icon: "warning",
+                          confirmButtonText: "OK",
+                        })
+                      }
+                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+                    >
+                      OK
+                    </button>
+                  ) : (
+                    <button onClick={() => setShowModal(false)} className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+                      OK
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

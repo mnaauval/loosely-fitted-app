@@ -43,6 +43,7 @@ const Cart = () => {
   const [stripeToken, setStripeToken] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [tempData, setTempData] = useState([]);
+  console.log(stripeToken);
 
   const shipping = 30;
   const discount = -15;
@@ -137,7 +138,24 @@ const Cart = () => {
 
       {stripeToken ? (
         <div className="flex items-center justify-center py-80">
-          <span className="text-center">Processing. . .</span>
+          <h1 className="text-4xl text-center">Processing. . .</h1>
+        </div>
+      ) : cart.products.length === 0 ? (
+        <div className="sm:p-5 p-2.5 xs:block hidden">
+          <h1 className="text-4xl font-light text-center">YOUR CART</h1>
+          {/* Top */}
+          <div className="flex items-center sm:justify-between justify-center py-5">
+            <div className="sm:flex flex-col items-center hidden">
+              {/* <span className="underline cursor-pointer my-0 mx-2.5">Shopping Bag {cart.products.length}</span> */}
+              <span className="underline cursor-pointer my-0">Your Wishlist {2}</span>
+            </div>
+          </div>
+          <h1 className="text-4xl text-center">You don't have any cart</h1>
+          <div className="md:block flex items-center justify-center md:mt-0 mt-10 mb-5">
+            <Button onClick={() => navigate("/products/All")} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
+              CONTINUE SHOPPING
+            </Button>
+          </div>
         </div>
       ) : (
         <div className="sm:p-5 p-2.5 xs:block hidden">
@@ -237,26 +255,27 @@ const Cart = () => {
                   <span>Total</span>
                   <span>$ {cart.totalPrice + shipping + discount + tax}</span>
                 </SummaryItem>
+
                 {/* prettier-ignore */}
                 <StripeCheckout 
-            stripeKey={KEY} 
-            token={handleToken} 
-            name="Loosely Fitted" 
-            image="https://avatars.githubusercontent.com/u/22863499?s=400&u=8fd1ee58d8bb34d6a38db1a2905ecbc6df4eda11&v=4" 
-            billingAddress 
-            shippingAddress 
-            description={`Your total is $${cart.totalPrice + shipping + discount + tax}`} 
-            amount={(cart.totalPrice + shipping + discount + tax) * 100}>
-              <Button type="filled" className="p-2.5 font-bold cursor-pointer border-2 border-gray-500 w-full">
-                CHECKOUT NOW
-              </Button>
-            </StripeCheckout>
+                  stripeKey={KEY} 
+                  token={handleToken} 
+                  name="Loosely Fitted" 
+                  image="https://avatars.githubusercontent.com/u/22863499?s=400&u=8fd1ee58d8bb34d6a38db1a2905ecbc6df4eda11&v=4" 
+                  billingAddress 
+                  shippingAddress 
+                  description={`Your total is $${cart.totalPrice + shipping + discount + tax}`} 
+                  amount={(cart.totalPrice + shipping + discount + tax) * 100}>
+                    <Button type="filled" className="p-2.5 font-bold cursor-pointer border-2 border-gray-500 w-full">
+                      CHECKOUT NOW
+                    </Button>
+                </StripeCheckout>
               </div>
             </div>
           </div>
 
           <div className="md:block flex items-center justify-center md:mt-0 mt-10 mb-5">
-            <Button onClick={() => navigate("/products")} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
+            <Button onClick={() => navigate("/products/All")} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
               CONTINUE SHOPPING
             </Button>
           </div>

@@ -54,6 +54,7 @@ const ProductDetail = () => {
       timer: 1500,
       confirmButtonText: "OK",
     });
+    navigate("/cart");
   };
   const handleUpdate = (product) => {
     dispatch(updateColorSize({ ...product, color, size }));
@@ -96,7 +97,7 @@ const ProductDetail = () => {
                   <span className="block md:text-xl text-md font-semibold mb-2.5">Color </span>
                   <div className="flex">
                     {product.color?.map((c) => {
-                      return <FilterColor key={c} color={c} onClick={() => handleColor(c)} className="w-[30px] h-[30px] rounded-full my-0 mx-1 cursor-pointer"></FilterColor>;
+                      return <FilterColor key={c} color={c} onClick={() => handleColor(c)} className="w-[30px] h-[30px] rounded-full my-0 mx-1 cursor-pointer border border-gray-300"></FilterColor>;
                     })}
                   </div>
                 </div>

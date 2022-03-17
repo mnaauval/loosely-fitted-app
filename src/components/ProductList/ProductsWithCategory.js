@@ -7,6 +7,7 @@ import { addCart, getTotal } from "../../redux/features/cartSlice";
 import { publicRequest } from "../../utilities/requestMethods";
 import QuickViewModal from "../Modal/QuickViewModal";
 import Swal from "sweetalert2";
+import SizeColorModal from "../Modal/SizeColorModal";
 
 const Icon = styled.div`
   width: 40px;
@@ -79,8 +80,14 @@ const ProductsWithCategory = ({ cat, filter, sort }) => {
     console.log(showModal);
   };
 
-  const getData = (id, imageUrl, title, desc, price, color, size) => {
-    let currentTempData = [id, imageUrl, title, desc, price, color, size];
+  // const getData = (id, imageUrl, title, desc, price, color, size) => {
+  //   let currentTempData = [id, imageUrl, title, desc, price, color, size];
+  //   setTempData((item) => [1, ...currentTempData]);
+  //   console.log(tempData);
+  //   return setShowModal(true);
+  // };
+  const getData = (id) => {
+    let currentTempData = [id];
     setTempData((item) => [1, ...currentTempData]);
     console.log(tempData);
     return setShowModal(true);
@@ -120,15 +127,16 @@ const ProductsWithCategory = ({ cat, filter, sort }) => {
                 </>
               ) : (
                 <>
-                  <Icon onClick={() => handleAddToCart(product)}>
-                    <ShoppingCartOutlined />
-                  </Icon>
                   <Icon
                     onClick={() => {
+                      handleAddToCart(product);
                       openModal();
-                      getData(product._id, product.imageUrl, product.title, product.desc, product.price, product.color, product.size);
+                      getData(product._id);
                     }}
                   >
+                    <ShoppingCartOutlined />
+                  </Icon>
+                  <Icon onClick={() => navigate(`/product/${product._id}`)}>
                     <Visibility />
                   </Icon>
                   <Icon>
@@ -142,7 +150,8 @@ const ProductsWithCategory = ({ cat, filter, sort }) => {
       </div>
 
       {/* {showModal === true ? <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} close={() => setShowModal(false)} /> : ""} */}
-      <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} showModal={showModal} setShowModal={setShowModal} />
+      {/* <QuickViewModal id={tempData[1]} imageUrl={tempData[2]} title={tempData[3]} desc={tempData[4]} price={tempData[5]} color={tempData[6]} size={tempData[7]} showModal={showModal} setShowModal={setShowModal} /> */}
+      <SizeColorModal id={tempData[1]} showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 };
