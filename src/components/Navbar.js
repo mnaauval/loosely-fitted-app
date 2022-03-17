@@ -21,7 +21,7 @@ const navigation = [
 ];
 
 const navigation2 = [
-  { name: "User Profile", path: "/" },
+  { name: "Your Profile", path: "/" },
   { name: "Transaction", path: "/order" },
 ];
 
@@ -167,7 +167,7 @@ const Navbar = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <NavLink to="/" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <PersonIcon className="mr-3.5" />
+                                    <PersonIcon className="mr-3.5 text-gray-500 " />
                                     User Profile
                                   </NavLink>
                                 )}
@@ -175,7 +175,7 @@ const Navbar = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <NavLink to="/order" className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <ReceiptOutlinedIcon className="mr-3.5" />
+                                    <ReceiptOutlinedIcon className="mr-3.5 text-gray-500" />
                                     Transaction
                                   </NavLink>
                                 )}
@@ -183,7 +183,7 @@ const Navbar = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <button onClick={logoutHandler} className={`${active ? "bg-transparent text-teal-600" : "text-gray-900"} flex pl-10 items-center w-full py-2 text-sm`}>
-                                    <LogoutIcon className="mr-3.5" />
+                                    <LogoutIcon className="mr-3.5 text-gray-500" />
                                     Logout
                                   </button>
                                 )}
@@ -233,7 +233,7 @@ const Navbar = () => {
                         </div>
                       </div>
                       {navigation2.map((nav) => (
-                        <Disclosure.Button as={NavLink} to={nav.path} className="block px-3 py-2 font-medium text-center hover:bg-teal-600 hover:text-white">
+                        <Disclosure.Button key={nav} as={NavLink} to={nav.path} className="block px-3 py-2 font-medium text-center hover:bg-teal-600 hover:text-white">
                           {nav.name}
                         </Disclosure.Button>
                       ))}
