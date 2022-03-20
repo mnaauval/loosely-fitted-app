@@ -37,9 +37,17 @@ const Login = () => {
             {/* <Input type="email" placeholder="Email" onChange={(e) => setUsername(e.target.value)} /> */}
             <Input type="text" placeholder="Username" onChange={(e) => setUsername(e.target.value)} />
             <Input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-            <button disabled={isFetching} type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer disabled:cursor-not-allowed disabled:text-teal-600">
-              LOGIN
-            </button>
+            {isFetching ? (
+              <button disabled={isFetching} type="submit" className="flex items-center justify-center sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer disabled:cursor-not-allowed disabled:text-teal-600">
+                <div>
+                  <div className="border-t-transparent w-5 h-5 border-4 border-white border-solid rounded-full animate-spin"></div>
+                </div>
+              </button>
+            ) : (
+              <button disabled={isFetching} type="submit" className="sm:w-2/5 border-none rounded-sm py-2.5 px-5 bg-teal-600 text-white cursor-pointer disabled:cursor-not-allowed disabled:text-teal-600">
+                LOGIN
+              </button>
+            )}
             {error && <p className="text-red-500 text-xs italic mb-3 mt-1">Something went wrong...</p>}
           </form>
 

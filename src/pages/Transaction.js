@@ -46,7 +46,7 @@ const Transaction = () => {
       <RequiredScreen />
       {orders.length === 0 ? (
         <div className="sm:p-8 px-0 py-2.5 xs:block hidden">
-          <h1 className="text-4xl text-center">You don't have any order</h1>
+          <h1 className="md:text-4xl text-2xl text-center">You don't have any order</h1>
           <div className="md:block flex items-center justify-center md:mt-0 mt-10 mb-5">
             <Button onClick={() => navigate("/products/All")} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
               CONTINUE SHOPPING

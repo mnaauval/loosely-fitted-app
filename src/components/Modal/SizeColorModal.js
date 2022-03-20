@@ -51,26 +51,26 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
     }
   };
 
-  const keyPress = useCallback(
-    (e) => {
-      if (e.key === "Escape" && showModal) {
-        setShowModal(false);
-        console.log("I pressed");
-      }
-    },
-    [setShowModal, showModal]
-  );
+  // const keyPress = useCallback(
+  //   (e) => {
+  //     if (e.key === "Escape" && showModal) {
+  //       setShowModal(false);
+  //       console.log("I pressed");
+  //     }
+  //   },
+  //   [setShowModal, showModal]
+  // );
 
-  useEffect(() => {
-    document.addEventListener("keydown", keyPress);
-    return () => document.removeEventListener("keydown", keyPress);
-  }, [keyPress]);
+  // useEffect(() => {
+  //   document.addEventListener("keydown", keyPress);
+  //   return () => document.removeEventListener("keydown", keyPress);
+  // }, [keyPress]);
 
   return (
     <>
       {showModal ? (
-        <div key={id} className="overflow-y-auto flex items-center justify-center fixed inset-0 z-50 bg-black/80" ref={modalRef} onClick={closeModal}>
-          <div className="relative inline-block align-bottom rounded-lg text-left overflow-hidden shadow-lg transform transition-all sm:my-6 sm:align-middle sm:max-w-[800px] sm:w-auto ">
+        <div key={id} className="overflow-y-auto flex items-center justify-center fixed inset-0 z-50 bg-black/80">
+          <div className="relative inline-block align-bottom text-left overflow-hidden shadow-lg transform transition-all sm:my-6 sm:align-middle sm:max-w-[800px] sm:w-auto ">
             {/* Content Wrapper */}
             <div className="w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden sm:px-6 sm:pt-8 md:p-6 lg:p-8">
               {/* Button X */}
@@ -103,7 +103,19 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                   <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               ) : (
-                <button onClick={() => setShowModal(false)} type="button" className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
+                <button
+                  onClick={() => {
+                    setShowModal(false);
+                    Swal.fire({
+                      text: "Cart added",
+                      icon: "success",
+                      timer: 1200,
+                      confirmButtonText: "OK",
+                    });
+                  }}
+                  type="button"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                >
                   <CloseOutlinedIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
               )}
@@ -124,8 +136,8 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                   </div>
                   <div className="mt-7">
                     <span className="block md:text-xl text-md font-semibold mb-2.5">Size </span>
-                    {/* <button className=" px-2.5 py-1.5 mt-1.5 mr-5 border-2 border-gray-400 rounded-md w-16">{size}</button> */}
-                    <select onChange={(e) => setSize(e.target.value)} className="sm:p-2.5 px-2.5 py-1 border-2 border-gray-400 rounded-md">
+                    {/* <button className=" px-2.5 py-1.5 mt-1.5 mr-5 border-2 border-gray-400 w-16">{size}</button> */}
+                    <select onChange={(e) => setSize(e.target.value)} className="sm:p-2.5 px-2.5 py-1 border-2 border-gray-400">
                       <option selected disabled>
                         Pick Size
                       </option>
@@ -138,7 +150,7 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                       })}
                     </select>
                   </div>
-                  {/* <button onClick={() => handleUpdate(product)} className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+                  {/* <button onClick={() => handleUpdate(product)} className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 text-white  cursor-pointer font-medium hover:bg-teal-700">
                     Update product
                   </button> */}
                   {!color ? (
@@ -150,7 +162,7 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                           confirmButtonText: "OK",
                         })
                       }
-                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 text-white  cursor-pointer font-medium hover:bg-teal-700"
                     >
                       ADD TO CART
                     </button>
@@ -163,12 +175,23 @@ const SizeColorModal = ({ id, showModal, setShowModal }) => {
                           confirmButtonText: "OK",
                         })
                       }
-                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 text-white  cursor-pointer font-medium hover:bg-teal-700"
                     >
                       OK
                     </button>
                   ) : (
-                    <button onClick={() => setShowModal(false)} className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+                    <button
+                      onClick={() => {
+                        setShowModal(false);
+                        Swal.fire({
+                          text: "Cart added",
+                          icon: "success",
+                          timer: 1200,
+                          confirmButtonText: "OK",
+                        });
+                      }}
+                      className="w-full  px-2.5 py-2 border-2 bg-teal-600 mt-5 text-white  cursor-pointer font-medium hover:bg-teal-700"
+                    >
                       OK
                     </button>
                   )}

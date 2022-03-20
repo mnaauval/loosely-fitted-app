@@ -2,12 +2,14 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import AllProducts from "../components/ProductList/AllProducts";
 import ProductsWithCategory from "../components/ProductList/ProductsWithCategory";
+import ApiTest from "../components/Utilities/ApiTest";
 import RequiredScreen from "../components/Utilities/RequiredScreen";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const ProductsList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("newest");
   console.log(cat);
 
@@ -21,11 +23,15 @@ const ProductsList = () => {
   const handleSort = (e) => {
     setSort(e.target.value);
   };
+  const clearHandler = () => {
+    setFilter("");
+    setSort("newest");
+  };
 
   return (
     <>
       <RequiredScreen />
-      <div className="xs:block hidden sm:p-5 p-2.5">
+      <div className="xs:block hidden sm:p-5 p-2.5 ">
         <div className="flex justify-between">
           <div className="m-5 flex sm:flex-row flex-col sm:items-center">
             <span className="md:text-xl text-md font-semibold sm:mr-5 mr-0">Filter Products:</span>
@@ -46,6 +52,9 @@ const ProductsList = () => {
               <option value="L">L</option>
               <option value="XL">XL</option>
             </select>
+            <button onClick={() => clearHandler()} className="">
+              <ClearIcon />
+            </button>
           </div>
           <div className="m-5 flex sm:flex-row flex-col sm:items-center">
             <span className="md:text-xl text-md font-semibold sm:mr-5 mr-0">Sort Products:</span>
@@ -56,6 +65,7 @@ const ProductsList = () => {
             </select>
           </div>
         </div>
+        {/* {cat && <ApiTest cat={cat} filter={filter} sort={sort} />} */}
         {cat === "All" ? <AllProducts filter={filter} sort={sort} /> : <ProductsWithCategory cat={cat} filter={filter} sort={sort} />}
       </div>
     </>

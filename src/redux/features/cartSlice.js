@@ -16,8 +16,6 @@ const cartSlice = createSlice({
       if (itemIndex >= 0) {
         // if item already in array cart i.e in cart[0]
         state.products[itemIndex].quantity += 1;
-        // state.products[itemIndex].cartColor = action.payload.color;
-        // state.products[itemIndex].cartSisze = action.payload.size;
         state.products[itemIndex].color = action.payload.color;
         state.products[itemIndex].size = action.payload.size;
       } else {

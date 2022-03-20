@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FavoriteBorderOutlined, ShoppingCartOutlined, Visibility } from "@mui/icons-material";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, getTotal } from "../../redux/features/cartSlice";
 import { publicRequest } from "../../utilities/requestMethods";
@@ -35,8 +35,8 @@ const AllProducts = ({ filter, sort }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tempData, setTempData] = useState([]);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [color] = useState("");
+  const [size] = useState("");
 
   const productsSum = filteredProducts.length;
 
@@ -106,7 +106,7 @@ const AllProducts = ({ filter, sort }) => {
   return (
     <div>
       <p className="text-right text-gray-60 px-8">Showing {productsSum} products</p>
-      <h1 className="text-center text-4xl">{`All Category`.toUpperCase()}.</h1>
+      <h1 className="text-center text-4xl">{`All Category`.toUpperCase()}</h1>
       <div className="p-5 xs:flex hidden flex-wrap justify-between">
         {filteredProducts.map((product) => (
           <div key={product._id} className="flex-1 m-1.5 min-w-[280px] h-[22rem] flex items-center justify-center bg-[#f5fbfd] relative">

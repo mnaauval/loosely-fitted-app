@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FavoriteBorderOutlined, ShoppingCartOutlined, Visibility } from "@mui/icons-material";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, getTotal } from "../../redux/features/cartSlice";
 import { publicRequest } from "../../utilities/requestMethods";
@@ -35,8 +35,8 @@ const NewestProducts = () => {
   const [newestProducts, setNewestProducts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [tempData, setTempData] = useState([]);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [color] = useState("");
+  const [size] = useState("");
 
   useEffect(() => {
     const getProducts = async () => {

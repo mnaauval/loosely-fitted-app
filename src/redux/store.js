@@ -1,21 +1,23 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import cartReducer from "./features/cartSlice";
 import userReducer from "./features/userSlice";
+import productsReducer from "./features/productsSlice";
+import { allProductsApi } from "./features/productsAPI";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import { allProductsApi } from "./features/productsAPI";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  blacklist: ["productsAPI"],
+  blacklist: ["productsAPI", "productsSlice"],
 };
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   user: userReducer,
-  // [allProductsApi.reducerPath]: allProductsApi.reducer,
+  products: productsReducer,
+  [allProductsApi.reducerPath]: allProductsApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

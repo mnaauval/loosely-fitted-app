@@ -150,7 +150,7 @@ const Cart = () => {
               <span className="underline cursor-pointer my-0">Your Wishlist {2}</span>
             </div>
           </div>
-          <h1 className="text-4xl text-center">You don't have any cart</h1>
+          <h1 className="md:text-4xl text-2xl text-center">You don't have any cart</h1>
           <div className="md:block flex items-center justify-center md:mt-0 mt-10 mb-5">
             <Button onClick={() => navigate("/products/All")} className="p-2.5 font-bold cursor-pointer border-2 border-gray-500">
               CONTINUE SHOPPING
@@ -184,13 +184,7 @@ const Cart = () => {
                           <h2 title={product.title} className="text-2xl truncate md:max-w-[500px] max-w-[200px]">
                             {product.title}
                           </h2>
-                          <button
-                            onClick={() => {
-                              openModal();
-                              getData(product._id);
-                            }}
-                            className="md:block hidden ml-5"
-                          >
+                          <button onClick={() => navigate(`/product/${product._id}`)} className="md:block hidden ml-5">
                             <EditOutlinedIcon />
                           </button>
                         </div>
@@ -205,13 +199,7 @@ const Cart = () => {
                     {/* Detail Price */}
                     <div className="flex-1 flex flex-col items-center justify-center py-2">
                       <div className="flex flex-row items-center">
-                        <button
-                          onClick={() => {
-                            openModal();
-                            getData(product._id);
-                          }}
-                          className="md:hidden block"
-                        >
+                        <button onClick={() => navigate(`/product/${product._id}`)} className="md:hidden block">
                           <EditOutlinedIcon />
                         </button>
                         <button onClick={() => handleRemoveItem(product)} className="mr-5">

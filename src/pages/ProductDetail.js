@@ -103,7 +103,7 @@ const ProductDetail = () => {
                 </div>
                 <div className="mt-7">
                   <span className="block md:text-xl text-md font-semibold mb-2.5">Size </span>
-                  <select onChange={(e) => setSize(e.target.value)} className="sm:p-2.5 px-2.5 py-1 border-2 border-gray-400 rounded-md">
+                  <select onChange={(e) => setSize(e.target.value)} className="sm:p-2.5 px-2.5 py-1 border-2 border-gray-400">
                     <option selected disabled>
                       Pick Size
                     </option>
@@ -122,7 +122,7 @@ const ProductDetail = () => {
 
           <div className="flex justify-center">
             {isLoggedOut ? (
-              <button onClick={() => navigate("/login")} className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700 disabled:cursor-not-allowed">
+              <button onClick={() => navigate("/login")} className="w-full p-[15px] border-2 bg-teal-600 text-white  cursor-pointer font-medium hover:bg-teal-700 disabled:cursor-not-allowed">
                 ADD TO CART
               </button>
             ) : !color ? (
@@ -134,7 +134,7 @@ const ProductDetail = () => {
                     confirmButtonText: "OK",
                   })
                 }
-                className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+                className="w-full p-[15px] border-2 bg-teal-600 text-white  cursor-pointer font-medium hover:bg-teal-700"
               >
                 ADD TO CART
               </button>
@@ -147,12 +147,12 @@ const ProductDetail = () => {
                     confirmButtonText: "OK",
                   })
                 }
-                className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700"
+                className="w-full p-[15px] border-2 bg-teal-600 text-white  cursor-pointer font-medium hover:bg-teal-700"
               >
                 ADD TO CART
               </button>
             ) : (
-              <button onClick={() => handleAddToCart(product)} className="w-full p-[15px] border-2 bg-teal-600 rounded-md text-white  cursor-pointer font-medium hover:bg-teal-700">
+              <button onClick={() => handleAddToCart(product)} className="w-full p-[15px] border-2 bg-teal-600 text-white  cursor-pointer font-medium hover:bg-teal-700">
                 ADD TO CART
               </button>
             )}
